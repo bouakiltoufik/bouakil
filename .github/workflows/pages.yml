@@ -1,8 +1,15 @@
 name: Déploiement GitHub Pages
 
+# Ce dépôt sert aujourd'hui GitHub Pages depuis la branche gh-pages
+# (Settings → Pages → Source : « Deploy from a branch »). Tant que ce réglage
+# n'est pas passé sur « GitHub Actions », ce workflow ne peut pas déployer :
+# il est donc en lancement manuel uniquement, pour ne pas échouer à chaque push.
+# Une fois le réglage changé, remettre le déclencheur ci-dessous :
+#
+#   push:
+#     branches: [main]
+#
 on:
-  push:
-    branches: [main, claude/tbconnect-superhote-style-cwwtju]
   workflow_dispatch:
 
 permissions:
