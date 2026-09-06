@@ -3,12 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TBConnect — Location de voiture à Cergy</title>
+<title>TBConnect — Deux Dacia Sandero à louer à Cergy</title>
 <meta name="description" content="Deux Dacia Sandero en location à Cergy (95). Réservation, assurance et assistance via Turo. Remise des clés à Cergy ou livraison dans le Val-d'Oise.">
+<link rel="canonical" href="https://bouakiltoufik.github.io/bouakil/">
+<meta name="theme-color" content="#09C17A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TBConnect — Deux Dacia Sandero à louer à Cergy">
+<meta property="og:description" content="Réservation en deux minutes sur Turo, clés en main à Cergy. Assurance et assistance comprises.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRental",
+  "name": "TBConnect",
+  "description": "Location de deux Dacia Sandero à Cergy, réservables sur Turo.",
+  "areaServed": "Cergy, Val-d'Oise, Île-de-France",
+  "address": { "@type": "PostalAddress", "addressLocality": "Cergy", "postalCode": "95000", "addressCountry": "FR" },
+  "sameAs": [
+    "https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3887182",
+    "https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3876979"
+  ]
+}
+</script>
 </head>
 <body>
 <!-- ARTIFACT:BODY:START -->
@@ -17,14 +40,14 @@
 <header class="nav" id="top">
   <div class="wrap nav__in">
     <a class="brand" href="#top" aria-label="TBConnect, accueil">
-      <span class="plate" aria-hidden="true"><span class="plate__eu">F</span><span class="plate__txt">TB-CONNECT</span></span>
-      <span class="brand__name">TBConnect</span>
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">tb<b>CONNECT</b></span>
     </a>
 
     <nav class="nav__links" aria-label="Navigation principale">
       <a href="#voitures">Les voitures</a>
-      <a href="#methode">Comment ça marche</a>
-      <a href="#inclus">Ce qui est inclus</a>
+      <a href="#etapes">Comment ça marche</a>
+      <a href="#inclus">Inclus</a>
       <a href="#zone">Où récupérer</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -33,7 +56,7 @@
       <button class="theme" id="theme" type="button" aria-label="Changer de thème">
         <span class="theme__dot" aria-hidden="true"></span><span class="theme__label">Thème</span>
       </button>
-      <a class="btn btn--primary btn--sm" href="#reserver">Réserver</a>
+      <a class="btn btn--brand btn--sm" href="#reserver">Réserver</a>
       <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span>
       </button>
@@ -45,40 +68,36 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <canvas class="hero__road" id="road" aria-hidden="true"></canvas>
   <div class="wrap hero__in">
-    <div class="hero__copy">
-      <p class="eyebrow">Location entre particuliers · Cergy · Val-d'Oise</p>
-      <h1>Deux Dacia Sandero à Cergy,<br><em>prêtes à partir.</em></h1>
-      <p class="lead">Pas de comptoir, pas de file d'attente, pas de vendeur d'options. Vous réservez sur <strong>Turo</strong>, je vous remets les clés à Cergy — ou je vous livre. Assurance et assistance comprises dans la location.</p>
+    <p class="pill"><span class="pill__dot" aria-hidden="true"></span> Location entre particuliers · Cergy (95)</p>
+    <h1>Deux Dacia Sandero,<br>réservables en deux minutes.</h1>
+    <p class="lead">Pas de comptoir, pas de file d'attente, pas de vendeur d'options. Vous réservez sur Turo, je vous remets les clés à Cergy — assurance et assistance comprises.</p>
 
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="#reserver">Réserver une Sandero</a>
-        <a class="btn btn--ghost" href="#methode">Comment ça marche</a>
-      </div>
-
-      <ul class="trust">
-        <li>Assurance et assistance incluses via Turo</li>
-        <li>Remise des clés à Cergy, ou livraison</li>
-        <li>Paiement et contrat 100 % dans l'appli</li>
-      </ul>
-
-      <div class="proof">
-        <span class="proof__mark" aria-hidden="true">↗</span>
-        <p><strong>Réservation sur Turo</strong><span>La plateforme gère le paiement, l'assurance, l'assistance et les avis publics de chaque voiture.</span></p>
-      </div>
+    <div class="hero__cta">
+      <a class="btn btn--brand btn--lg" href="#reserver">Voir les disponibilités</a>
+      <a class="btn btn--plain btn--lg" href="#etapes">Comment ça marche</a>
     </div>
 
+    <ul class="trust">
+      <li>Assurance incluse</li>
+      <li>Clés en main à Cergy</li>
+      <li>Aucun paiement sur ce site</li>
+    </ul>
+
     <!-- Sélecteur de véhicule -> Turo -->
-    <div class="book" id="reserver">
-      <div class="book__head">
-        <h2>Choisir votre voiture</h2>
-        <span class="tag tag--live">Dispos en direct</span>
+    <div class="booker" id="reserver">
+      <span class="hand hand--booker" aria-hidden="true">on se retrouve à Cergy&nbsp;!
+        <svg viewBox="0 0 90 60" class="hand__arrow"><path d="M6 4 C 44 2, 74 16, 72 46" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M63 36 L73 48 L60 51" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+
+      <div class="booker__head">
+        <h2>Choisissez votre Sandero</h2>
+        <span class="chip chip--live">Dispos en direct sur Turo</span>
       </div>
 
       <div class="picker" id="picker" role="radiogroup" aria-label="Choisir une Dacia Sandero"></div>
 
-      <div class="field-row">
+      <div class="booker__dates">
         <div class="field">
           <label for="depart">Départ souhaité</label>
           <input type="date" id="depart" name="depart">
@@ -87,160 +106,134 @@
           <label for="retour">Retour souhaité</label>
           <input type="date" id="retour" name="retour">
         </div>
-      </div>
-
-      <div class="estimate">
-        <div class="estimate__line">
-          <span class="estimate__label">Durée</span>
-          <span class="estimate__price"><b id="est-days">—</b></span>
+        <div class="field field--out">
+          <label>Durée</label>
+          <output id="est-days">—</output>
         </div>
-        <p class="estimate__detail" id="est-detail">Choisissez vos dates : elles seront à confirmer sur Turo, avec le tarif du jour.</p>
       </div>
 
-      <a class="btn btn--primary btn--full" id="cta-turo" href="#voitures" target="_blank" rel="noopener noreferrer">
-        Voir les dates sur Turo <span aria-hidden="true">↗</span>
-      </a>
-      <p class="book__note">Redirection vers l'annonce · Aucun paiement sur ce site</p>
+      <a class="btn btn--brand btn--full btn--lg" id="cta-turo" href="#voitures" target="_blank" rel="noopener noreferrer">Voir les dates sur Turo</a>
+      <p class="booker__note" id="est-detail">Les dates et le tarif du jour se confirment sur l'annonce Turo.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ BANDEAU TURO ============ -->
-<section class="marques">
-  <div class="wrap">
-    <p class="marques__label">Tout passe par Turo, rien par téléphone</p>
-    <ul class="marques__list">
+<!-- ============ BANDEAU ============ -->
+<section class="band">
+  <div class="wrap band__in">
+    <p class="band__label">Tout passe par Turo</p>
+    <ul class="band__list">
       <li>Paiement sécurisé</li><li>Assurance incluse</li><li>Assistance 24/7</li><li>Avis vérifiés</li><li>Contrat dans l'appli</li>
     </ul>
   </div>
 </section>
 
-<!-- ============ AVANT / APRÈS ============ -->
-<section class="section compare" id="pourquoi">
+<!-- ============ PROBLÈME ============ -->
+<section class="section problem">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">Pourquoi ici plutôt qu'au comptoir</p>
-      <h2>Un départ le samedi matin&nbsp;: <span class="strike">une heure de guichet</span> ou dix minutes.</h2>
-      <p class="sec-lead">Le même week-end, vécu dans une agence de gare puis avec moi. Rien d'exagéré&nbsp;: ce sont les cinq points sur lesquels une petite flotte peut réellement faire mieux qu'un loueur classique.</p>
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Le vrai sujet</p>
+      <h2>Louer une voiture vous prend une heure de samedi.</h2>
+      <p class="sec-lead">Entre le comptoir, l'assurance qu'on vous vend sur place et la caution bloquée, la location classique coûte surtout du temps. Voilà ce qui change quand vous louez la voiture de quelqu'un.</p>
     </header>
 
-    <div class="compare__grid">
-      <article class="col col--old">
-        <h3><span class="col__badge">Agence de location classique</span></h3>
-        <ul class="steps">
-          <li><span class="steps__t">Avant</span> Devis en ligne, puis un tarif différent au comptoir</li>
-          <li><span class="steps__t">Sur place</span> File d'attente, puis assurance complémentaire à signer</li>
-          <li><span class="steps__t">Caution</span> Plusieurs centaines d'euros bloqués sur la carte</li>
-          <li><span class="steps__t">Départ</span> Un véhicule attribué au hasard du parc disponible</li>
-          <li><span class="steps__t">Retour</span> Un état des lieux fait sans vous, contesté plus tard</li>
+    <div class="split">
+      <article class="pane pane--old">
+        <span class="pane__tag">Agence de location</span>
+        <ul class="ticks ticks--no">
+          <li>Un tarif en ligne, un autre au comptoir</li>
+          <li>File d'attente, puis assurance à signer sur place</li>
+          <li>Plusieurs centaines d'euros bloqués sur la carte</li>
+          <li>Un véhicule attribué au hasard du parc</li>
+          <li>Un état des lieux fait sans vous</li>
         </ul>
-        <p class="col__foot">Interlocuteur&nbsp;: <b>un guichet</b></p>
       </article>
-
-      <article class="col col--new">
-        <h3><span class="col__badge col__badge--brand">Avec TBConnect sur Turo</span></h3>
-        <ul class="steps">
-          <li><span class="steps__t">Avant</span> Tarif, photos et avis publics sur l'annonce</li>
-          <li><span class="steps__t">Réservation</span> Compte vérifié par Turo, assurance déjà comprise</li>
-          <li><span class="steps__t">Départ</span> On se donne rendez-vous à Cergy, ou je livre</li>
-          <li><span class="steps__t">La voiture</span> Celle des photos, exactement — il n'y en a que deux</li>
-          <li><span class="steps__t">Retour</span> Photos horodatées dans l'appli, des deux côtés</li>
+      <article class="pane pane--new">
+        <span class="pane__tag pane__tag--brand">Avec TBConnect</span>
+        <ul class="ticks">
+          <li>Le tarif, les photos et les avis sont publics</li>
+          <li>Compte vérifié par Turo, assurance déjà comprise</li>
+          <li>Rendez-vous à Cergy, ou je vous livre</li>
+          <li>La voiture des photos — il n'y en a que deux</li>
+          <li>Photos horodatées dans l'appli, des deux côtés</li>
         </ul>
-        <p class="col__foot col__foot--good">Interlocuteur&nbsp;: <b>le propriétaire</b></p>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ============ 3 ÉTAPES ============ -->
+<section class="section steps" id="etapes">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Comment ça marche</p>
+      <h2>De l'envie de partir aux clés en main, en 3 étapes.</h2>
+    </header>
+
+    <ol class="steps__grid">
+      <li>
+        <span class="steps__n">1</span>
+        <h3>Vous réservez sur Turo</h3>
+        <p>Voiture, dates, horaires. Le tarif affiché est celui que vous payez, assurance comprise. Annulation possible selon les conditions de la plateforme.</p>
+      </li>
+      <li>
+        <span class="steps__n">2</span>
+        <h3>Turo vérifie votre compte</h3>
+        <p>Permis et identité contrôlés par la plateforme, pas par moi. Je confirme, et on convient du point de rendez-vous par message.</p>
+      </li>
+      <li>
+        <span class="steps__n">3</span>
+        <h3>On se retrouve à Cergy</h3>
+        <p>Tour de la voiture ensemble, photos dans l'appli, clés en main. Au retour, la même chose dans l'autre sens — dix minutes.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
 <!-- ============ LES VOITURES ============ -->
 <section class="section fleet" id="voitures">
   <div class="wrap">
-    <header class="sec-head sec-head--row">
-      <div>
-        <p class="eyebrow">Les voitures</p>
-        <h2>Deux Dacia Sandero, entretenues par la même personne.</h2>
-      </div>
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Les voitures</p>
+      <h2>Deux Sandero, entretenues par la même personne.</h2>
       <p class="sec-lead">Petites à garer, sobres sur autoroute, assez coffrées pour un week-end à quatre. Le tarif du jour et les disponibilités s'affichent sur Turo.</p>
     </header>
-
-    <div class="fleet__grid fleet__grid--duo" id="fleet-grid"></div>
-    <p class="fleet__note">Les deux voitures sont basées à Cergy (95). Kilométrage inclus, carburant et options de livraison&nbsp;: détaillés sur chaque annonce.</p>
+    <div class="fleet__grid" id="fleet-grid"></div>
+    <p class="fleet__note">Les deux voitures sont basées à Cergy (95). Kilométrage inclus, carburant et options de livraison : détaillés sur chaque annonce.</p>
   </div>
 </section>
 
 <!-- ============ INCLUS ============ -->
 <section class="section incl" id="inclus">
   <div class="wrap">
-    <header class="sec-head">
+    <header class="sec-head sec-head--center">
       <p class="eyebrow">Ce qui est inclus</p>
       <h2>Ce qu'on ne vous facturera pas en supplément.</h2>
     </header>
-    <ul class="incl__grid">
+    <ul class="cards">
       <li><h3>Assurance et assistance</h3><p>Comprises dans la réservation Turo, avec le niveau de protection que vous choisissez au moment de réserver.</p></li>
-      <li><h3>Voiture préparée</h3><p>Nettoyée intérieur et extérieur entre chaque location, pneus et niveaux vérifiés avant la remise des clés.</p></li>
-      <li><h3>Remise en main propre</h3><p>Rendez-vous à Cergy, à l'heure qui vous arrange, y compris tôt le matin ou en soirée.</p></li>
-      <li><h3>Livraison possible</h3><p>Gare, domicile ou bureau dans le Val-d'Oise et l'ouest francilien, sur demande avant la réservation.</p></li>
+      <li><h3>Voiture préparée</h3><p>Nettoyée dedans comme dehors entre chaque location, pneus et niveaux vérifiés avant la remise des clés.</p></li>
+      <li><h3>Remise en main propre</h3><p>Rendez-vous à Cergy à l'heure qui vous arrange, y compris tôt le matin ou en soirée.</p></li>
+      <li><h3>Livraison possible</h3><p>Gare, domicile ou bureau dans le Val-d'Oise et l'ouest francilien, sur demande avant de réserver.</p></li>
       <li><h3>Un vrai interlocuteur</h3><p>Vous parlez au propriétaire, pas à un centre d'appels. Réponse dans la messagerie Turo, souvent dans l'heure.</p></li>
-      <li><h3>État des lieux partagé</h3><p>Photos horodatées prises par vous et par moi au départ comme au retour, conservées dans l'appli.</p></li>
+      <li><h3>État des lieux partagé</h3><p>Photos horodatées prises par vous et par moi, au départ comme au retour, conservées dans l'appli.</p></li>
     </ul>
   </div>
 </section>
 
-<!-- ============ FAITS ============ -->
-<section class="stats">
-  <div class="wrap stats__in">
-    <div><b>2</b><span>Dacia Sandero disponibles</span></div>
-    <div><b>95</b><span>basées à Cergy, Val-d'Oise</span></div>
-    <div><b>5</b><span>places et 5 portes</span></div>
-    <div><b>24<small>/7</small></b><span>assistance via Turo</span></div>
-  </div>
-</section>
-
-<!-- ============ MÉTHODE ============ -->
-<section class="section how" id="methode">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">Comment ça marche</p>
-      <h2>Trois étapes, aucune paperasse.</h2>
-    </header>
-    <ol class="how__list">
-      <li>
-        <span class="how__n">01</span>
-        <h3>Vous réservez sur Turo</h3>
-        <p>Vous choisissez la voiture, vos dates et vos horaires directement sur l'annonce. Le tarif affiché est celui que vous payez, assurance comprise.</p>
-        <p class="how__meta">Depuis le site ou l'appli</p>
-      </li>
-      <li>
-        <span class="how__n">02</span>
-        <h3>Turo vérifie votre compte</h3>
-        <p>Permis et identité sont contrôlés par la plateforme, pas par moi. Je confirme la réservation et on convient du lieu de rendez-vous par message.</p>
-        <p class="how__meta">Généralement le jour même</p>
-      </li>
-      <li>
-        <span class="how__n">03</span>
-        <h3>On se retrouve à Cergy</h3>
-        <p>Tour du véhicule ensemble, photos dans l'appli, clés en main. Au retour, même chose dans l'autre sens — dix minutes montre en main.</p>
-        <p class="how__meta">Ou livraison, sur demande</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
 <!-- ============ ZONE ============ -->
-<section class="section spots" id="zone">
+<section class="section zone" id="zone">
   <div class="wrap">
-    <header class="sec-head sec-head--row">
-      <div>
-        <p class="eyebrow">Où récupérer la voiture</p>
-        <h2>À Cergy, ou là où vous êtes.</h2>
-      </div>
-      <p class="sec-lead">La remise des clés à Cergy est gratuite. Pour une livraison ailleurs, demandez-moi avant de réserver : je vous confirme la faisabilité et le supplément éventuel.</p>
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Où récupérer la voiture</p>
+      <h2>À Cergy, ou là où vous êtes.</h2>
+      <p class="sec-lead">La remise des clés à Cergy est gratuite. Pour une livraison ailleurs, demandez-moi avant de réserver : je confirme le créneau et le supplément éventuel.</p>
     </header>
-    <ul class="spots__grid">
-      <li><b>Cergy</b><span>Point de rendez-vous convenu par message</span><span class="mono">Inclus</span></li>
-      <li><b>Cergy-Préfecture</b><span>RER A et gare routière, à pied</span><span class="mono">Inclus</span></li>
-      <li><b>Val-d'Oise</b><span>Pontoise, Osny, Éragny, Saint-Ouen-l'Aumône…</span><span class="mono">Sur demande</span></li>
-      <li><b>Aéroports</b><span>Roissy-CDG et Beauvais</span><span class="mono">Sur demande</span></li>
+    <ul class="zone__grid">
+      <li><b>Cergy</b><span>Point de rendez-vous convenu par message</span><em>Inclus</em></li>
+      <li><b>Cergy-Préfecture</b><span>RER A et gare routière, à pied</span><em>Inclus</em></li>
+      <li><b>Val-d'Oise</b><span>Pontoise, Osny, Éragny, Saint-Ouen-l'Aumône…</span><em>Sur demande</em></li>
+      <li><b>Aéroports</b><span>Roissy-CDG et Beauvais</span><em>Sur demande</em></li>
     </ul>
   </div>
 </section>
@@ -248,10 +241,10 @@
 <!-- ============ AVIS ============ -->
 <section class="section reviews" id="avis">
   <div class="wrap">
-    <header class="sec-head">
+    <header class="sec-head sec-head--center">
       <p class="eyebrow">Avis</p>
       <h2>Les avis sont chez Turo, pas chez moi.</h2>
-      <p class="sec-lead">Impossible de les trier ou de les réécrire&nbsp;: chaque locataire note la voiture après son trajet, et tout est public sur l'annonce. Le plus simple est d'aller les lire à la source.</p>
+      <p class="sec-lead">Je ne peux ni les trier ni les réécrire : chaque locataire note la voiture après son trajet, et tout est public sur l'annonce. Autant aller les lire à la source.</p>
     </header>
     <div class="reviews__links" id="review-links"></div>
   </div>
@@ -260,47 +253,47 @@
 <!-- ============ FAQ ============ -->
 <section class="section faq" id="faq">
   <div class="wrap wrap--narrow">
-    <header class="sec-head">
-      <p class="eyebrow">Questions fréquentes</p>
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">FAQ</p>
       <h2>Ce qu'on me demande avant de réserver.</h2>
     </header>
 
     <div class="faq__list">
       <details open>
         <summary>Faut-il un compte Turo pour louer ?</summary>
-        <p>Oui. La réservation, le paiement, l'assurance et le contrat passent par Turo — c'est ce qui remplace le comptoir et la paperasse. La création du compte prend quelques minutes et sert à vérifier votre permis et votre identité.</p>
+        <p>Oui. La réservation, le paiement, l'assurance et le contrat passent par Turo — c'est ce qui remplace le comptoir et la paperasse. Créer le compte prend quelques minutes et sert à vérifier votre permis et votre identité.</p>
       </details>
       <details>
         <summary>Quelles conditions d'âge et de permis ?</summary>
-        <p>Ce sont celles de Turo : votre profil est approuvé par la plateforme au moment de l'inscription, en fonction de votre âge et de l'ancienneté de votre permis. Si votre compte est validé, vous pouvez réserver.</p>
+        <p>Ce sont celles de Turo : votre profil est approuvé par la plateforme à l'inscription, selon votre âge et l'ancienneté de votre permis. Si votre compte est validé, vous pouvez réserver.</p>
       </details>
       <details>
         <summary>Y a-t-il une caution à déposer ?</summary>
-        <p>Aucune caution ne m'est versée en main propre. La protection choisie sur Turo au moment de la réservation détermine votre part en cas de dommage&nbsp;; tout est indiqué sur la page de paiement, avant de valider.</p>
+        <p>Aucune caution ne m'est versée en main propre. La protection choisie sur Turo détermine votre part en cas de dommage ; tout est affiché sur la page de paiement, avant de valider.</p>
       </details>
       <details>
         <summary>Combien de kilomètres sont inclus ?</summary>
-        <p>Le forfait kilométrique et le prix du kilomètre supplémentaire sont affichés sur chaque annonce, et varient avec la durée de la location. Pour un long trajet, dites-le-moi avant&nbsp;: on ajuste plutôt que de découvrir un dépassement au retour.</p>
+        <p>Le forfait kilométrique et le prix du kilomètre supplémentaire figurent sur chaque annonce et varient avec la durée. Pour un long trajet, dites-le-moi avant : on ajuste plutôt que de découvrir un dépassement au retour.</p>
       </details>
       <details>
         <summary>Comment se passe le carburant ?</summary>
-        <p>Vous récupérez la voiture avec un certain niveau et la rendez au même niveau. La station la plus proche du point de rendez-vous vous est indiquée dans le message de départ.</p>
+        <p>Vous récupérez la voiture à un certain niveau et la rendez au même niveau. La station la plus proche du rendez-vous vous est indiquée dans le message de départ.</p>
       </details>
       <details>
         <summary>Puis-je être livré ou récupérer la voiture en gare ?</summary>
-        <p>À Cergy-Préfecture, oui, sans supplément. Ailleurs dans le Val-d'Oise, à Roissy ou à Beauvais, écrivez-moi avant de réserver&nbsp;: je vous confirme le créneau et le supplément éventuel.</p>
+        <p>À Cergy-Préfecture, oui, sans supplément. Ailleurs dans le Val-d'Oise, à Roissy ou à Beauvais, écrivez-moi avant de réserver : je confirme le créneau et le supplément éventuel.</p>
       </details>
       <details>
         <summary>Et si je suis en retard au retour ?</summary>
-        <p>Prévenez-moi par message dès que vous le savez. Tant que la voiture n'est pas réservée derrière vous, on trouve un arrangement&nbsp;; les prolongations se font en deux clics dans l'appli.</p>
+        <p>Prévenez-moi dès que vous le savez. Tant que la voiture n'est pas réservée derrière vous, on trouve un arrangement ; les prolongations se font en deux clics dans l'appli.</p>
       </details>
       <details>
         <summary>Que faire en cas de panne ou d'accident ?</summary>
-        <p>L'assistance Turo est joignable 24 h/24 depuis l'appli, et je reste évidemment atteignable en parallèle. Ne faites rien réparer sans nous prévenir&nbsp;: la prise en charge passe par la plateforme.</p>
+        <p>L'assistance Turo est joignable 24 h/24 depuis l'appli, et je reste atteignable en parallèle. Ne faites rien réparer sans nous prévenir : la prise en charge passe par la plateforme.</p>
       </details>
       <details>
-        <summary>Peut-on partir à l'étranger avec la voiture ?</summary>
-        <p>Demandez-moi avant de réserver&nbsp;: les sorties du territoire dépendent des conditions de Turo et de mon accord. Sans validation préalable, la voiture reste en France.</p>
+        <summary>Peut-on partir à l'étranger ?</summary>
+        <p>Demandez-moi avant de réserver : les sorties du territoire dépendent des conditions de Turo et de mon accord. Sans validation préalable, la voiture reste en France.</p>
       </details>
     </div>
   </div>
@@ -309,10 +302,9 @@
 <!-- ============ CTA FINAL ============ -->
 <section class="final">
   <div class="wrap final__in">
-    <div>
-      <h2>La Sandero est libre ce week-end.</h2>
-      <p>Vérifiez les dates sur Turo, réservez en deux minutes, on se retrouve à Cergy.</p>
-    </div>
+    <span class="hand hand--final" aria-hidden="true">libre ce week-end</span>
+    <h2>Les clés vous attendent à Cergy.</h2>
+    <p>Vérifiez les dates sur Turo, réservez en deux minutes, on se retrouve sur place.</p>
     <div class="final__cta" id="final-cta"></div>
   </div>
 </section>
@@ -322,7 +314,7 @@
 <footer class="foot">
   <div class="wrap foot__in">
     <div class="foot__brand">
-      <span class="plate plate--lg" aria-hidden="true"><span class="plate__eu">F</span><span class="plate__txt">TB-CONNECT</span></span>
+      <span class="brand__name brand__name--foot">tb<b>CONNECT</b></span>
       <p>Deux Dacia Sandero en location à Cergy, dans le Val-d'Oise. Réservation, assurance et assistance gérées par Turo. Un seul propriétaire, joignable dans la messagerie.</p>
     </div>
     <nav class="foot__col" aria-label="Les voitures">
@@ -331,16 +323,16 @@
     </nav>
     <nav class="foot__col" aria-label="Infos pratiques">
       <h3>Infos pratiques</h3>
-      <a href="#methode">Comment ça marche</a><a href="#inclus">Ce qui est inclus</a><a href="#zone">Où récupérer</a><a href="#faq">FAQ</a>
+      <a href="#etapes">Comment ça marche</a><a href="#inclus">Ce qui est inclus</a><a href="#zone">Où récupérer</a><a href="#faq">FAQ</a>
     </nav>
     <div class="foot__col">
       <h3>Contact</h3>
-      <p>Le plus rapide reste la messagerie Turo, depuis l'une des deux annonces&nbsp;: les réponses y sont horodatées et la réservation suit derrière.</p>
+      <p>Le plus rapide reste la messagerie Turo, depuis l'une des deux annonces : les réponses y sont horodatées et la réservation suit derrière.</p>
     </div>
   </div>
   <div class="wrap foot__legal">
     <p>© <span id="year">2026</span> TBConnect — Cergy (95)</p>
-    <p>Site indépendant. Turo est une marque de Turo Inc., utilisée ici pour désigner la plateforme de réservation.</p>
+    <p>Site indépendant. Turo est une marque de Turo Inc., citée ici comme plateforme de réservation.</p>
   </div>
 </footer>
 <!-- ARTIFACT:BODY:END -->

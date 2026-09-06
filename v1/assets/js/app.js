@@ -1,7 +1,7 @@
 /* ==========================================================================
    TBConnect — interactions du site vitrine
    1. Données  2. Thème  3. Navigation  4. Silhouettes + rendu
-   5. Sélecteur de réservation (renvoi vers Turo)
+   5. Sélecteur de réservation (renvoi vers Turo)  6. Traînées du hero
    ========================================================================== */
 (function () {
   'use strict';
@@ -120,7 +120,7 @@
         '</dl>' +
         '<div class="car__foot">' +
           '<p class="car__price"><b>Tarif du jour</b><span>affiché sur l\'annonce</span></p>' +
-          '<a class="btn btn--brand btn--sm" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Réserver sur Turo</a>' +
+          '<a class="btn btn--primary btn--sm" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Réserver <span aria-hidden="true">↗</span></a>' +
         '</div>' +
       '</div>' +
     '</article>';
@@ -143,7 +143,7 @@
   var finalCta = document.getElementById('final-cta');
   if (finalCta) {
     finalCta.innerHTML = CARS.map(function (c, i) {
-      return '<a class="btn btn--lg ' + (i === 0 ? 'btn--onDeep' : 'btn--onDeepGhost') + '" href="' + c.turo +
+      return '<a class="btn ' + (i === 0 ? 'btn--light' : 'btn--outline') + '" href="' + c.turo +
         '" target="_blank" rel="noopener noreferrer">La ' + c.variant.toLowerCase() + ' <span aria-hidden="true">↗</span></a>';
     }).join('');
   }
@@ -188,7 +188,7 @@
     var c = selectedCar();
     if (cta) {
       cta.href = c.turo;
-      cta.textContent = 'Voir les dates de la ' + c.variant.toLowerCase() + ' sur Turo';
+      cta.innerHTML = 'Voir les dates de la ' + c.variant.toLowerCase() + ' sur Turo <span aria-hidden="true">↗</span>';
     }
   }
 
@@ -207,14 +207,14 @@
     var d1 = new Date(inDep.value), d2 = new Date(inRet.value);
     if (isNaN(d1) || isNaN(d2) || d2 <= d1) {
       outDays.textContent = '—';
-      outDetail.textContent = 'La date de retour doit être postérieure à la date de départ.';
+      outDetail.textContent = 'La date de retour doit être postérieure au départ.';
       return;
     }
     var days = Math.max(1, Math.round((d2 - d1) / 864e5));
-    outDays.textContent = days + ' j';
+    outDays.textContent = days + ' jour' + (days > 1 ? 's' : '');
     outDetail.textContent = 'Du ' + d1.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
       ' au ' + d2.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
-      ' — dates et tarif du jour à confirmer sur Turo.';
+      ' — à confirmer sur Turo, avec le tarif du jour.';
   }
 
   if (inDep) {
@@ -232,4 +232,67 @@
   syncCta();
   updateDuration();
 
+  /* ------------------ 6. Traînées lumineuses du hero -------------------- */
+  var canvas = document.getElementById('road');
+  if (canvas && canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var trails = [];
+    var w = 0, h = 0;
+
+    function accentColor() {
+      return getComputedStyle(root).getPropertyValue('--accent').trim() || '#3A38E8';
+    }
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function seed() {
+      trails = [];
+      var lanes = 7;
+      for (var i = 0; i < lanes; i++) {
+        var t = i / (lanes - 1);
+        trails.push({
+          y: 24 + t * (h - 40),
+          len: 60 + Math.random() * 190,
+          x: Math.random() * w,
+          speed: 0.35 + t * 1.5,
+          alpha: 0.10 + t * 0.22,
+          weight: 1 + t * 2.2
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var col = accentColor();
+      trails.forEach(function (tr) {
+        var g = ctx.createLinearGradient(tr.x, 0, tr.x + tr.len, 0);
+        g.addColorStop(0, 'transparent');
+        g.addColorStop(1, col);
+        ctx.globalAlpha = tr.alpha;
+        ctx.strokeStyle = g;
+        ctx.lineWidth = tr.weight;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(tr.x, tr.y);
+        ctx.lineTo(tr.x + tr.len, tr.y);
+        ctx.stroke();
+        if (!reduced) {
+          tr.x += tr.speed;
+          if (tr.x > w) tr.x = -tr.len - Math.random() * 240;
+        }
+      });
+      ctx.globalAlpha = 1;
+      if (!reduced) requestAnimationFrame(draw);
+    }
+
+    resize(); seed(); draw();
+    window.addEventListener('resize', function () { resize(); seed(); if (reduced) draw(); });
+    if (themeBtn) themeBtn.addEventListener('click', function () { if (reduced) draw(); });
+  }
 })();

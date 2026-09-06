@@ -1,0 +1,1000 @@
+<title>TBConnect — Deux Dacia Sandero à louer à Cergy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap">
+<style>
+/* ==========================================================================
+   TBConnect — variante « labo » (identité verte, trame de points)
+   Palette : vert #09C17A sur blanc, vert profond #052E1C pour les fins de page
+   Typo    : Plus Jakarta Sans · JetBrains Mono (données) · Caveat (annotations)
+   ========================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root{
+  --ground:#FFFFFF;
+  --sand:#F5F8F6;
+  --surface:#FFFFFF;
+  --surface-2:#F2F6F3;
+  --ink:#08150E;
+  --ink-2:#39493F;
+  --muted:#6C7C73;
+  --line:#E4EBE6;
+  --line-strong:#CBD8CF;
+
+  --brand:#09C17A;
+  --brand-strong:#07A368;
+  --brand-ink:#FFFFFF;
+  --brand-soft:#E6FAF1;
+  --brand-line:#A8E8CB;
+
+  --deep:#052E1C;
+  --deep-ink:#EAF6EF;
+  --deep-muted:#8FB0A0;
+  --deep-line:rgba(255,255,255,.12);
+
+  --dot:rgba(5,46,28,.14);
+  --warn:#B26A00;
+
+  --car-blue:#2E63D8;
+  --car-white:#E3E7F2;
+  --car-stroke:#AEB6CD;
+
+  --shadow-sm:0 1px 2px rgba(5,46,28,.06);
+  --shadow:0 2px 4px rgba(5,46,28,.05), 0 18px 40px -20px rgba(5,46,28,.28);
+  --shadow-brand:0 12px 30px -12px rgba(9,193,122,.55);
+
+  --r:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  --wrap:1140px;
+  --sp:clamp(64px,8vw,110px);
+
+  --f-body:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --f-hand:"Caveat","Segoe Script","Bradley Hand",cursive;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#06120C;
+    --sand:#0A1A12;
+    --surface:#0C1E15;
+    --surface-2:#11291C;
+    --ink:#EAF6EF;
+    --ink-2:#C2D6CA;
+    --muted:#8CA396;
+    --line:#1B3527;
+    --line-strong:#2A4A37;
+
+    --brand:#43D49A;
+    --brand-strong:#6BE0B2;
+    --brand-ink:#04180E;
+    --brand-soft:#0D2E1F;
+    --brand-line:#1F5A3E;
+
+    --deep:#030D07;
+    --deep-ink:#EAF6EF;
+    --deep-muted:#8FB0A0;
+    --deep-line:rgba(255,255,255,.1);
+
+    --dot:rgba(160,230,196,.16);
+
+    --car-blue:#6E97FF;
+    --car-white:#E9EDF8;
+    --car-stroke:#7A83A6;
+
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+    --shadow:0 2px 4px rgba(0,0,0,.45), 0 18px 40px -20px rgba(0,0,0,.8);
+    --shadow-brand:0 12px 30px -14px rgba(67,212,154,.5);
+  }
+}
+
+:root[data-theme="dark"]{
+  --ground:#06120C;
+  --sand:#0A1A12;
+  --surface:#0C1E15;
+  --surface-2:#11291C;
+  --ink:#EAF6EF;
+  --ink-2:#C2D6CA;
+  --muted:#8CA396;
+  --line:#1B3527;
+  --line-strong:#2A4A37;
+
+  --brand:#43D49A;
+  --brand-strong:#6BE0B2;
+  --brand-ink:#04180E;
+  --brand-soft:#0D2E1F;
+  --brand-line:#1F5A3E;
+
+  --deep:#030D07;
+  --deep-ink:#EAF6EF;
+  --deep-muted:#8FB0A0;
+  --deep-line:rgba(255,255,255,.1);
+
+  --dot:rgba(160,230,196,.16);
+
+  --car-blue:#6E97FF;
+  --car-white:#E9EDF8;
+  --car-stroke:#7A83A6;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+  --shadow:0 2px 4px rgba(0,0,0,.45), 0 18px 40px -20px rgba(0,0,0,.8);
+  --shadow-brand:0 12px 30px -14px rgba(67,212,154,.5);
+}
+
+/* ---------- 2. Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font:400 17px/1.62 var(--f-body);letter-spacing:-.006em;overflow-x:hidden;
+}
+img{max-width:100%}
+h1,h2,h3{font-family:var(--f-body);font-weight:800;letter-spacing:-.035em;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,5.6vw,64px)}
+h2{font-size:clamp(28px,3.6vw,44px)}
+h3{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit}
+b,strong{font-weight:700}
+.wrap{width:min(100% - 40px,var(--wrap));margin-inline:auto}
+.wrap--narrow{width:min(100% - 40px,780px)}
+.section{padding-block:var(--sp)}
+:focus-visible{outline:2.5px solid var(--brand-strong);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--brand);color:var(--brand-ink);padding:12px 18px;z-index:99}
+.skip:focus{left:12px;top:12px}
+
+.eyebrow{
+  font-family:var(--f-mono);font-size:12px;font-weight:500;text-transform:uppercase;
+  letter-spacing:.16em;color:var(--brand-strong);margin-bottom:16px;
+}
+.sec-head{max-width:720px;margin-bottom:56px}
+.sec-head--center{margin-inline:auto;text-align:center}
+.sec-lead{color:var(--muted);font-size:18px;margin-top:18px}
+.sec-head--center .sec-lead{margin-inline:auto;max-width:60ch}
+
+/* Annotations manuscrites */
+.hand{
+  font-family:var(--f-hand);font-size:26px;font-weight:700;color:var(--brand-strong);
+  line-height:1;position:absolute;pointer-events:none;
+}
+.hand__arrow{position:absolute;width:64px;height:44px;color:var(--brand-strong)}
+
+/* ---------- 3. Boutons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font:700 15.5px/1 var(--f-body);letter-spacing:-.01em;
+  padding:14px 22px;border-radius:var(--r-pill);border:1.5px solid transparent;
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease;
+}
+.btn--brand{background:var(--brand);color:var(--brand-ink);box-shadow:var(--shadow-brand)}
+.btn--brand:hover{background:var(--brand-strong);transform:translateY(-2px)}
+.btn--plain{background:var(--surface);color:var(--ink);border-color:var(--line-strong)}
+.btn--plain:hover{border-color:var(--brand);color:var(--brand-strong);transform:translateY(-2px)}
+.btn--onDeep{background:#fff;color:#052E1C}
+.btn--onDeep:hover{transform:translateY(-2px)}
+.btn--onDeepGhost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.btn--onDeepGhost:hover{border-color:#fff;transform:translateY(-2px)}
+.btn--sm{padding:10px 17px;font-size:14.5px}
+.btn--lg{padding:16px 28px;font-size:16.5px}
+.btn--full{width:100%}
+
+/* ---------- 4. Navigation ---------- */
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav.is-stuck{border-bottom-color:var(--line)}
+.nav__in{display:flex;align-items:center;gap:24px;min-height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand__mark{
+  width:22px;height:22px;border-radius:7px;flex-shrink:0;
+  background:linear-gradient(140deg,var(--brand) 0%,var(--brand-strong) 100%);
+  box-shadow:inset 0 0 0 3.5px var(--ground);
+}
+.brand__name{font:400 20px/1 var(--f-body);letter-spacing:-.03em}
+.brand__name b{font-weight:800}
+.nav__links{display:flex;gap:26px;margin-inline:auto}
+.nav__links a{text-decoration:none;font-size:15px;font-weight:600;color:var(--ink-2)}
+.nav__links a:hover{color:var(--brand-strong)}
+.nav__actions{display:flex;align-items:center;gap:11px;margin-left:auto}
+.theme{
+  display:inline-flex;align-items:center;gap:7px;background:transparent;border:1.5px solid var(--line-strong);
+  border-radius:var(--r-pill);padding:8px 13px;cursor:pointer;color:var(--muted);font:600 13px/1 var(--f-body);
+}
+.theme:hover{border-color:var(--brand);color:var(--brand-strong)}
+.theme__dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
+.burger{display:none;width:40px;height:40px;background:transparent;border:1.5px solid var(--line-strong);border-radius:11px;cursor:pointer;padding:0;position:relative}
+.burger span{position:absolute;left:11px;width:16px;height:2px;background:var(--ink)}
+.burger span:first-child{top:14px}
+.burger span:last-child{top:21px}
+
+/* ---------- 5. Hero ---------- */
+.hero{position:relative;padding-top:64px;padding-bottom:var(--sp);overflow:hidden;text-align:center}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background-image:radial-gradient(var(--dot) 1.2px,transparent 1.2px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 26%,#000 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 26%,#000 40%,transparent 100%);
+}
+.hero::after{
+  content:"";position:absolute;left:50%;top:-260px;width:760px;height:560px;transform:translateX(-50%);z-index:-1;
+  background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--brand) 28%,transparent) 0%,transparent 62%);
+  filter:blur(10px);
+}
+.hero__in{display:flex;flex-direction:column;align-items:center}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;font:600 13.5px/1 var(--f-body);
+  padding:9px 16px;border-radius:var(--r-pill);border:1px solid var(--line);
+  background:var(--surface);color:var(--ink-2);box-shadow:var(--shadow-sm);margin-bottom:26px;
+}
+.pill__dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+.lead{font-size:19.5px;color:var(--muted);margin-top:22px;max-width:60ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;margin-top:26px}
+.trust li{position:relative;padding-left:23px;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+.trust li::before{
+  content:"";position:absolute;left:0;top:6px;width:12px;height:7px;
+  border-left:2.4px solid var(--brand);border-bottom:2.4px solid var(--brand);transform:rotate(-45deg);
+}
+
+/* Bloc de réservation */
+.booker{
+  position:relative;margin-top:56px;width:min(100%,720px);text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:26px;box-shadow:var(--shadow);display:grid;gap:16px;
+}
+.hand--booker{top:-46px;right:-6px;transform:rotate(-6deg)}
+.hand--booker .hand__arrow{top:22px;right:-2px;transform:rotate(6deg)}
+.booker__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.booker__head h2{font-size:21px;letter-spacing:-.025em}
+.chip{
+  font:500 11.5px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.08em;
+  padding:7px 11px;border-radius:var(--r-pill);background:var(--brand-soft);color:var(--brand-strong);
+  border:1px solid var(--brand-line);
+}
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.pick{
+  display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;padding:14px;
+  border-radius:var(--r);border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink);
+  transition:border-color .16s,background-color .16s;font-family:var(--f-body);
+}
+.pick:hover{border-color:var(--brand)}
+.pick[aria-checked="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.pick__swatch{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.pick__txt{display:grid;gap:3px}
+.pick__txt b{font-size:15px;font-weight:700}
+.pick__txt span{font-size:12.5px;color:var(--muted)}
+
+.booker__dates{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.field{display:grid;gap:7px}
+.field label{font:600 12.5px/1 var(--f-body);color:var(--muted)}
+.field input{
+  width:100%;font:600 15px/1.2 var(--f-body);color:var(--ink);
+  background:var(--surface-2);border:1.5px solid var(--line);border-radius:var(--r);padding:13px 12px;
+}
+.field input:focus{border-color:var(--brand);outline:none}
+.field--out output{
+  display:block;font:600 16px/1 var(--f-mono);color:var(--brand-strong);
+  background:var(--brand-soft);border:1.5px solid var(--brand-line);border-radius:var(--r);
+  padding:14px 16px;white-space:nowrap;
+}
+.booker__note{font-size:13px;color:var(--muted);text-align:center}
+
+/* ---------- 6. Bandeau ---------- */
+.band{background:var(--sand);border-block:1px solid var(--line);padding-block:26px}
+.band__in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 40px;justify-content:center}
+.band__label{font:700 13px/1 var(--f-body);color:var(--ink)}
+.band__list{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:center}
+.band__list li{
+  font:500 13px/1 var(--f-mono);color:var(--muted);position:relative;padding-left:17px;
+}
+.band__list li::before{content:"";position:absolute;left:0;top:2px;width:8px;height:8px;border-radius:50%;background:var(--brand);opacity:.55}
+
+/* ---------- 7. Problème ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pane{border-radius:var(--r-xl);padding:30px;border:1px solid var(--line);background:var(--surface)}
+.pane--old{background:var(--sand)}
+.pane--new{border-color:var(--brand-line);box-shadow:var(--shadow)}
+.pane__tag{
+  display:inline-block;margin-bottom:22px;font:600 12px/1 var(--f-mono);text-transform:uppercase;
+  letter-spacing:.1em;padding:8px 12px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--muted);
+}
+.pane__tag--brand{background:var(--brand);color:var(--brand-ink)}
+.ticks{display:grid;gap:14px}
+.ticks li{position:relative;padding-left:30px;font-size:16px;color:var(--ink-2)}
+.ticks li::before{
+  content:"";position:absolute;left:2px;top:6px;width:13px;height:8px;
+  border-left:2.4px solid var(--brand);border-bottom:2.4px solid var(--brand);transform:rotate(-45deg);
+}
+.ticks--no li::before{
+  border:none;top:9px;left:1px;width:14px;height:2px;background:var(--line-strong);transform:none;
+}
+
+/* ---------- 8. Étapes ---------- */
+.steps{background:var(--sand);border-block:1px solid var(--line)}
+.steps__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.steps__grid li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:30px}
+.steps__n{
+  display:grid;place-items:center;width:36px;height:36px;border-radius:12px;margin-bottom:18px;
+  background:var(--brand-soft);color:var(--brand-strong);border:1px solid var(--brand-line);
+  font:600 15px/1 var(--f-mono);
+}
+.steps__grid h3{margin-bottom:10px}
+.steps__grid p{color:var(--muted);font-size:15.5px}
+
+/* ---------- 9. Voitures ---------- */
+.fleet__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:880px;margin-inline:auto}
+.car{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease}
+.car:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.car__vis{
+  position:relative;height:180px;display:grid;place-items:center;border-bottom:1px solid var(--line);
+  background-color:var(--sand);
+  background-image:radial-gradient(var(--dot) 1.1px,transparent 1.1px);background-size:22px 22px;
+}
+.car__vis svg{width:76%;height:auto;overflow:visible}
+.car__cat{
+  position:absolute;top:14px;left:14px;font:500 10.5px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.1em;
+  padding:7px 10px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);color:var(--muted);
+}
+.car__body{padding:22px;display:flex;flex-direction:column;gap:16px;flex:1}
+.car__title{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.car__title h3{font-size:18px}
+.car__title span{font:500 12px/1 var(--f-mono);color:var(--muted)}
+.car__specs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+.car__specs div{display:grid;gap:3px}
+.car__specs dt{font:500 10.5px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.car__specs dd{margin:0;font-size:15px;font-weight:600}
+.car__foot{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.car__price b{display:block;font:700 15px/1 var(--f-body)}
+.car__price span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+.fleet__note{margin-top:26px;text-align:center;font-size:14px;color:var(--muted)}
+
+/* ---------- 10. Cartes « inclus » ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cards li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:28px}
+.cards h3{margin-bottom:10px;position:relative;padding-left:28px}
+.cards h3::before{
+  content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:6px;
+  background:var(--brand-soft);border:1px solid var(--brand-line);
+}
+.cards h3::after{
+  content:"";position:absolute;left:4px;top:7px;width:8px;height:5px;
+  border-left:2px solid var(--brand-strong);border-bottom:2px solid var(--brand-strong);transform:rotate(-45deg);
+}
+.cards p{color:var(--muted);font-size:15px}
+
+/* ---------- 11. Zone ---------- */
+.zone{background:var(--sand);border-block:1px solid var(--line)}
+.zone__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.zone__grid li{display:grid;gap:7px;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line)}
+.zone__grid b{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.zone__grid span{font-size:14.5px;color:var(--muted)}
+.zone__grid em{
+  justify-self:start;font-style:normal;font:500 11px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.09em;
+  padding:6px 10px;border-radius:var(--r-pill);background:var(--brand-soft);color:var(--brand-strong);
+}
+
+/* ---------- 12. Avis ---------- */
+.reviews__links{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:880px;margin-inline:auto}
+.rev-link{
+  display:flex;align-items:center;gap:15px;text-decoration:none;padding:22px;
+  border-radius:var(--r-xl);border:1px solid var(--line);background:var(--surface);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.rev-link:hover{transform:translateY(-2px);border-color:var(--brand);box-shadow:var(--shadow)}
+.rev-link__dot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.rev-link__txt{display:grid;gap:3px}
+.rev-link__txt b{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.rev-link__txt span{font-size:13.5px;color:var(--muted)}
+.rev-link__go{margin-left:auto;font-family:var(--f-mono);color:var(--brand-strong);font-size:18px}
+
+/* ---------- 13. FAQ ---------- */
+.faq__list{display:grid;gap:12px}
+.faq__list details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.faq__list details[open]{border-color:var(--brand-line)}
+.faq__list summary{
+  cursor:pointer;list-style:none;padding:20px 52px 20px 22px;position:relative;
+  font-weight:700;font-size:17px;letter-spacing:-.02em;
+}
+.faq__list summary::-webkit-details-marker{display:none}
+.faq__list summary::after{
+  content:"";position:absolute;right:24px;top:26px;width:9px;height:9px;
+  border-right:2.2px solid var(--brand-strong);border-bottom:2.2px solid var(--brand-strong);
+  transform:rotate(45deg);transition:transform .2s ease;
+}
+.faq__list details[open] summary::after{transform:rotate(-135deg);top:30px}
+.faq__list details p{padding:0 24px 22px;color:var(--muted);font-size:16px}
+
+/* ---------- 14. CTA final + pied ---------- */
+.final{background:var(--deep);color:#fff;padding-block:84px;text-align:center;position:relative;overflow:hidden}
+.final::before{
+  content:"";position:absolute;inset:0;opacity:.6;
+  background-image:radial-gradient(rgba(255,255,255,.10) 1.2px,transparent 1.2px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000 30%,transparent 100%);
+  mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000 30%,transparent 100%);
+}
+.final__in{position:relative;display:flex;flex-direction:column;align-items:center}
+.hand--final{position:static;display:block;margin-bottom:12px;color:#7BE3B4;transform:rotate(-3deg)}
+.final h2{max-width:18ch}
+.final p{color:var(--deep-muted);margin-top:16px;max-width:52ch}
+.final__cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px}
+
+.foot{background:var(--deep);color:var(--deep-muted);padding-bottom:34px;font-size:14.5px}
+.foot__in{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.2fr;gap:34px;padding-top:52px;border-top:1px solid var(--deep-line)}
+.brand__name--foot{color:#fff;font-size:19px}
+.foot__brand p{margin-top:14px;max-width:36ch;line-height:1.65}
+.foot__col{display:grid;gap:10px;align-content:start}
+.foot__col>div{display:grid;gap:10px}
+.foot h3{color:#fff;font-size:14px;margin-bottom:4px}
+.foot a{text-decoration:none}
+.foot a:hover{color:#fff}
+.foot__col p{line-height:1.65}
+.foot__legal{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;margin-top:42px;padding-top:22px;border-top:1px solid var(--deep-line);font-size:13px;color:#6F9080}
+
+/* ---------- 15. Responsive ---------- */
+@media (max-width:1020px){
+  .cards,.steps__grid,.zone__grid{grid-template-columns:repeat(2,1fr)}
+  .foot__in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  html{scroll-padding-top:72px}
+  body{font-size:16px}
+  .nav__links{
+    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--surface);border-block:1px solid var(--line);padding:6px 20px 14px;
+  }
+  .nav.is-open .nav__links{display:flex}
+  .nav__links a{padding:13px 0;border-bottom:1px solid var(--line)}
+  .burger{display:block}
+  .theme__label{display:none}
+  .theme{padding:9px}
+  .split,.picker,.cards,.steps__grid,.zone__grid,.fleet__grid,.reviews__links{grid-template-columns:1fr}
+  .booker__dates{grid-template-columns:1fr 1fr}
+  .field--out{grid-column:1 / -1}
+  .field--out output{text-align:center}
+  .hand--booker{top:-40px;right:auto;left:4px}
+  .hand--booker .hand__arrow{display:none}
+  .sec-head{margin-bottom:38px}
+  .foot__in{grid-template-columns:1fr;gap:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+</style>
+<!-- ARTIFACT:BODY:START -->
+<a class="skip" href="#voitures">Aller aux voitures</a>
+
+<header class="nav" id="top">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="TBConnect, accueil">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">tb<b>CONNECT</b></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Navigation principale">
+      <a href="#voitures">Les voitures</a>
+      <a href="#etapes">Comment ça marche</a>
+      <a href="#inclus">Inclus</a>
+      <a href="#zone">Où récupérer</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="theme" id="theme" type="button" aria-label="Changer de thème">
+        <span class="theme__dot" aria-hidden="true"></span><span class="theme__label">Thème</span>
+      </button>
+      <a class="btn btn--brand btn--sm" href="#reserver">Réserver</a>
+      <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero__in">
+    <p class="pill"><span class="pill__dot" aria-hidden="true"></span> Location entre particuliers · Cergy (95)</p>
+    <h1>Deux Dacia Sandero,<br>réservables en deux minutes.</h1>
+    <p class="lead">Pas de comptoir, pas de file d'attente, pas de vendeur d'options. Vous réservez sur Turo, je vous remets les clés à Cergy — assurance et assistance comprises.</p>
+
+    <div class="hero__cta">
+      <a class="btn btn--brand btn--lg" href="#reserver">Voir les disponibilités</a>
+      <a class="btn btn--plain btn--lg" href="#etapes">Comment ça marche</a>
+    </div>
+
+    <ul class="trust">
+      <li>Assurance incluse</li>
+      <li>Clés en main à Cergy</li>
+      <li>Aucun paiement sur ce site</li>
+    </ul>
+
+    <!-- Sélecteur de véhicule -> Turo -->
+    <div class="booker" id="reserver">
+      <span class="hand hand--booker" aria-hidden="true">on se retrouve à Cergy&nbsp;!
+        <svg viewBox="0 0 90 60" class="hand__arrow"><path d="M6 4 C 44 2, 74 16, 72 46" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M63 36 L73 48 L60 51" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+
+      <div class="booker__head">
+        <h2>Choisissez votre Sandero</h2>
+        <span class="chip chip--live">Dispos en direct sur Turo</span>
+      </div>
+
+      <div class="picker" id="picker" role="radiogroup" aria-label="Choisir une Dacia Sandero"></div>
+
+      <div class="booker__dates">
+        <div class="field">
+          <label for="depart">Départ souhaité</label>
+          <input type="date" id="depart" name="depart">
+        </div>
+        <div class="field">
+          <label for="retour">Retour souhaité</label>
+          <input type="date" id="retour" name="retour">
+        </div>
+        <div class="field field--out">
+          <label>Durée</label>
+          <output id="est-days">—</output>
+        </div>
+      </div>
+
+      <a class="btn btn--brand btn--full btn--lg" id="cta-turo" href="#voitures" target="_blank" rel="noopener noreferrer">Voir les dates sur Turo</a>
+      <p class="booker__note" id="est-detail">Les dates et le tarif du jour se confirment sur l'annonce Turo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANDEAU ============ -->
+<section class="band">
+  <div class="wrap band__in">
+    <p class="band__label">Tout passe par Turo</p>
+    <ul class="band__list">
+      <li>Paiement sécurisé</li><li>Assurance incluse</li><li>Assistance 24/7</li><li>Avis vérifiés</li><li>Contrat dans l'appli</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PROBLÈME ============ -->
+<section class="section problem">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Le vrai sujet</p>
+      <h2>Louer une voiture vous prend une heure de samedi.</h2>
+      <p class="sec-lead">Entre le comptoir, l'assurance qu'on vous vend sur place et la caution bloquée, la location classique coûte surtout du temps. Voilà ce qui change quand vous louez la voiture de quelqu'un.</p>
+    </header>
+
+    <div class="split">
+      <article class="pane pane--old">
+        <span class="pane__tag">Agence de location</span>
+        <ul class="ticks ticks--no">
+          <li>Un tarif en ligne, un autre au comptoir</li>
+          <li>File d'attente, puis assurance à signer sur place</li>
+          <li>Plusieurs centaines d'euros bloqués sur la carte</li>
+          <li>Un véhicule attribué au hasard du parc</li>
+          <li>Un état des lieux fait sans vous</li>
+        </ul>
+      </article>
+      <article class="pane pane--new">
+        <span class="pane__tag pane__tag--brand">Avec TBConnect</span>
+        <ul class="ticks">
+          <li>Le tarif, les photos et les avis sont publics</li>
+          <li>Compte vérifié par Turo, assurance déjà comprise</li>
+          <li>Rendez-vous à Cergy, ou je vous livre</li>
+          <li>La voiture des photos — il n'y en a que deux</li>
+          <li>Photos horodatées dans l'appli, des deux côtés</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ÉTAPES ============ -->
+<section class="section steps" id="etapes">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Comment ça marche</p>
+      <h2>De l'envie de partir aux clés en main, en 3 étapes.</h2>
+    </header>
+
+    <ol class="steps__grid">
+      <li>
+        <span class="steps__n">1</span>
+        <h3>Vous réservez sur Turo</h3>
+        <p>Voiture, dates, horaires. Le tarif affiché est celui que vous payez, assurance comprise. Annulation possible selon les conditions de la plateforme.</p>
+      </li>
+      <li>
+        <span class="steps__n">2</span>
+        <h3>Turo vérifie votre compte</h3>
+        <p>Permis et identité contrôlés par la plateforme, pas par moi. Je confirme, et on convient du point de rendez-vous par message.</p>
+      </li>
+      <li>
+        <span class="steps__n">3</span>
+        <h3>On se retrouve à Cergy</h3>
+        <p>Tour de la voiture ensemble, photos dans l'appli, clés en main. Au retour, la même chose dans l'autre sens — dix minutes.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ LES VOITURES ============ -->
+<section class="section fleet" id="voitures">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Les voitures</p>
+      <h2>Deux Sandero, entretenues par la même personne.</h2>
+      <p class="sec-lead">Petites à garer, sobres sur autoroute, assez coffrées pour un week-end à quatre. Le tarif du jour et les disponibilités s'affichent sur Turo.</p>
+    </header>
+    <div class="fleet__grid" id="fleet-grid"></div>
+    <p class="fleet__note">Les deux voitures sont basées à Cergy (95). Kilométrage inclus, carburant et options de livraison : détaillés sur chaque annonce.</p>
+  </div>
+</section>
+
+<!-- ============ INCLUS ============ -->
+<section class="section incl" id="inclus">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Ce qui est inclus</p>
+      <h2>Ce qu'on ne vous facturera pas en supplément.</h2>
+    </header>
+    <ul class="cards">
+      <li><h3>Assurance et assistance</h3><p>Comprises dans la réservation Turo, avec le niveau de protection que vous choisissez au moment de réserver.</p></li>
+      <li><h3>Voiture préparée</h3><p>Nettoyée dedans comme dehors entre chaque location, pneus et niveaux vérifiés avant la remise des clés.</p></li>
+      <li><h3>Remise en main propre</h3><p>Rendez-vous à Cergy à l'heure qui vous arrange, y compris tôt le matin ou en soirée.</p></li>
+      <li><h3>Livraison possible</h3><p>Gare, domicile ou bureau dans le Val-d'Oise et l'ouest francilien, sur demande avant de réserver.</p></li>
+      <li><h3>Un vrai interlocuteur</h3><p>Vous parlez au propriétaire, pas à un centre d'appels. Réponse dans la messagerie Turo, souvent dans l'heure.</p></li>
+      <li><h3>État des lieux partagé</h3><p>Photos horodatées prises par vous et par moi, au départ comme au retour, conservées dans l'appli.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ZONE ============ -->
+<section class="section zone" id="zone">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Où récupérer la voiture</p>
+      <h2>À Cergy, ou là où vous êtes.</h2>
+      <p class="sec-lead">La remise des clés à Cergy est gratuite. Pour une livraison ailleurs, demandez-moi avant de réserver : je confirme le créneau et le supplément éventuel.</p>
+    </header>
+    <ul class="zone__grid">
+      <li><b>Cergy</b><span>Point de rendez-vous convenu par message</span><em>Inclus</em></li>
+      <li><b>Cergy-Préfecture</b><span>RER A et gare routière, à pied</span><em>Inclus</em></li>
+      <li><b>Val-d'Oise</b><span>Pontoise, Osny, Éragny, Saint-Ouen-l'Aumône…</span><em>Sur demande</em></li>
+      <li><b>Aéroports</b><span>Roissy-CDG et Beauvais</span><em>Sur demande</em></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ AVIS ============ -->
+<section class="section reviews" id="avis">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">Avis</p>
+      <h2>Les avis sont chez Turo, pas chez moi.</h2>
+      <p class="sec-lead">Je ne peux ni les trier ni les réécrire : chaque locataire note la voiture après son trajet, et tout est public sur l'annonce. Autant aller les lire à la source.</p>
+    </header>
+    <div class="reviews__links" id="review-links"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq" id="faq">
+  <div class="wrap wrap--narrow">
+    <header class="sec-head sec-head--center">
+      <p class="eyebrow">FAQ</p>
+      <h2>Ce qu'on me demande avant de réserver.</h2>
+    </header>
+
+    <div class="faq__list">
+      <details open>
+        <summary>Faut-il un compte Turo pour louer ?</summary>
+        <p>Oui. La réservation, le paiement, l'assurance et le contrat passent par Turo — c'est ce qui remplace le comptoir et la paperasse. Créer le compte prend quelques minutes et sert à vérifier votre permis et votre identité.</p>
+      </details>
+      <details>
+        <summary>Quelles conditions d'âge et de permis ?</summary>
+        <p>Ce sont celles de Turo : votre profil est approuvé par la plateforme à l'inscription, selon votre âge et l'ancienneté de votre permis. Si votre compte est validé, vous pouvez réserver.</p>
+      </details>
+      <details>
+        <summary>Y a-t-il une caution à déposer ?</summary>
+        <p>Aucune caution ne m'est versée en main propre. La protection choisie sur Turo détermine votre part en cas de dommage ; tout est affiché sur la page de paiement, avant de valider.</p>
+      </details>
+      <details>
+        <summary>Combien de kilomètres sont inclus ?</summary>
+        <p>Le forfait kilométrique et le prix du kilomètre supplémentaire figurent sur chaque annonce et varient avec la durée. Pour un long trajet, dites-le-moi avant : on ajuste plutôt que de découvrir un dépassement au retour.</p>
+      </details>
+      <details>
+        <summary>Comment se passe le carburant ?</summary>
+        <p>Vous récupérez la voiture à un certain niveau et la rendez au même niveau. La station la plus proche du rendez-vous vous est indiquée dans le message de départ.</p>
+      </details>
+      <details>
+        <summary>Puis-je être livré ou récupérer la voiture en gare ?</summary>
+        <p>À Cergy-Préfecture, oui, sans supplément. Ailleurs dans le Val-d'Oise, à Roissy ou à Beauvais, écrivez-moi avant de réserver : je confirme le créneau et le supplément éventuel.</p>
+      </details>
+      <details>
+        <summary>Et si je suis en retard au retour ?</summary>
+        <p>Prévenez-moi dès que vous le savez. Tant que la voiture n'est pas réservée derrière vous, on trouve un arrangement ; les prolongations se font en deux clics dans l'appli.</p>
+      </details>
+      <details>
+        <summary>Que faire en cas de panne ou d'accident ?</summary>
+        <p>L'assistance Turo est joignable 24 h/24 depuis l'appli, et je reste atteignable en parallèle. Ne faites rien réparer sans nous prévenir : la prise en charge passe par la plateforme.</p>
+      </details>
+      <details>
+        <summary>Peut-on partir à l'étranger ?</summary>
+        <p>Demandez-moi avant de réserver : les sorties du territoire dépendent des conditions de Turo et de mon accord. Sans validation préalable, la voiture reste en France.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final">
+  <div class="wrap final__in">
+    <span class="hand hand--final" aria-hidden="true">libre ce week-end</span>
+    <h2>Les clés vous attendent à Cergy.</h2>
+    <p>Vérifiez les dates sur Turo, réservez en deux minutes, on se retrouve sur place.</p>
+    <div class="final__cta" id="final-cta"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <span class="brand__name brand__name--foot">tb<b>CONNECT</b></span>
+      <p>Deux Dacia Sandero en location à Cergy, dans le Val-d'Oise. Réservation, assurance et assistance gérées par Turo. Un seul propriétaire, joignable dans la messagerie.</p>
+    </div>
+    <nav class="foot__col" aria-label="Les voitures">
+      <h3>Les voitures</h3>
+      <div id="foot-cars"></div>
+    </nav>
+    <nav class="foot__col" aria-label="Infos pratiques">
+      <h3>Infos pratiques</h3>
+      <a href="#etapes">Comment ça marche</a><a href="#inclus">Ce qui est inclus</a><a href="#zone">Où récupérer</a><a href="#faq">FAQ</a>
+    </nav>
+    <div class="foot__col">
+      <h3>Contact</h3>
+      <p>Le plus rapide reste la messagerie Turo, depuis l'une des deux annonces : les réponses y sont horodatées et la réservation suit derrière.</p>
+    </div>
+  </div>
+  <div class="wrap foot__legal">
+    <p>© <span id="year">2026</span> TBConnect — Cergy (95)</p>
+    <p>Site indépendant. Turo est une marque de Turo Inc., citée ici comme plateforme de réservation.</p>
+  </div>
+</footer>
+<!-- ARTIFACT:BODY:END -->
+<script>
+/* ==========================================================================
+   TBConnect — interactions du site vitrine
+   1. Données  2. Thème  3. Navigation  4. Silhouettes + rendu
+   5. Sélecteur de réservation (renvoi vers Turo)
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  /* ------------------------------ 1. Données ---------------------------- */
+  /* Une seule source de vérité : modifier ici met à jour le sélecteur du hero,
+     les fiches, les liens d'avis, le CTA final et le pied de page. */
+  var CARS = [
+    {
+      id: 'bleue',
+      name: 'Dacia Sandero',
+      variant: 'Bleue',
+      color: 'var(--car-blue)',
+      swatch: 'var(--car-blue)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3887182',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    },
+    {
+      id: 'blanche',
+      name: 'Dacia Sandero',
+      variant: 'Blanche',
+      color: 'var(--car-white)',
+      swatch: 'var(--car-white)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3876979',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    }
+  ];
+
+  var root = document.documentElement;
+
+  /* ------------------------------- 2. Thème ----------------------------- */
+  var stored = null;
+  try { stored = localStorage.getItem('tbc-theme'); } catch (e) { /* navigation privée */ }
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+
+  function currentTheme() {
+    var set = root.getAttribute('data-theme');
+    if (set) return set;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  var themeBtn = document.getElementById('theme');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('tbc-theme', next); } catch (e) { /* ignoré */ }
+      themeBtn.setAttribute('aria-label', next === 'dark' ? 'Passer en thème clair' : 'Passer en thème sombre');
+    });
+  }
+
+  /* ---------------------------- 3. Navigation --------------------------- */
+  var nav = document.querySelector('.nav');
+  var burger = document.getElementById('burger');
+
+  if (burger && nav) {
+    burger.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    nav.querySelectorAll('.nav__links a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  window.addEventListener('scroll', function () {
+    if (nav) nav.classList.toggle('is-stuck', window.scrollY > 8);
+  }, { passive: true });
+
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  /* --------------------- 4. Silhouettes et rendu ------------------------ */
+  /* Silhouette construite en primitives géométriques, pas en tracé dessiné. */
+  function silhouette(color) {
+    var x1 = 26, x2 = 176, bodyTop = 48, roofTop = 20, bottom = 74, r = 15;
+    var roofX1 = x1 + 34, roofX2 = x2 - 26;
+    var roof = 'M' + roofX1 + ',' + bodyTop + ' L' + (roofX1 + 18) + ',' + roofTop +
+               ' L' + (roofX2 - 14) + ',' + roofTop + ' L' + roofX2 + ',' + bodyTop + ' Z';
+    var glass = 'M' + (roofX1 + 11) + ',' + (bodyTop - 6) + ' L' + (roofX1 + 25) + ',' + (roofTop + 9) +
+                ' L' + (roofX2 - 21) + ',' + (roofTop + 9) + ' L' + (roofX2 - 10) + ',' + (bodyTop - 6) + ' Z';
+
+    return '<svg viewBox="0 0 200 100" role="img" aria-hidden="true" style="color:' + color + '">' +
+      '<line x1="6" y1="' + (bottom + r) + '" x2="194" y2="' + (bottom + r) + '" stroke="var(--line-strong)" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="' + roof + '" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<rect x="' + x1 + '" y="' + bodyTop + '" width="' + (x2 - x1) + '" height="' + (bottom - bodyTop) + '" rx="12" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<path d="' + glass + '" fill="var(--surface)" opacity=".85"/>' +
+      '<rect x="' + (x2 - 9) + '" y="' + (bodyTop + 6) + '" width="7" height="6" rx="2" fill="var(--surface)" opacity=".7"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
+      '</svg>';
+  }
+
+  function carCard(c) {
+    return '<article class="car">' +
+      '<div class="car__vis"><span class="car__cat">Sandero ' + c.variant.toLowerCase() + '</span>' + silhouette(c.color) + '</div>' +
+      '<div class="car__body">' +
+        '<div class="car__title"><h3>' + c.name + ' — ' + c.variant + '</h3><span>Cergy (95)</span></div>' +
+        '<dl class="car__specs">' +
+          '<div><dt>Boîte</dt><dd>' + c.boite + '</dd></div>' +
+          '<div><dt>Énergie</dt><dd>' + c.energie + '</dd></div>' +
+          '<div><dt>Places</dt><dd>' + c.places + '</dd></div>' +
+          '<div><dt>Coffre</dt><dd>' + c.coffre + '</dd></div>' +
+        '</dl>' +
+        '<div class="car__foot">' +
+          '<p class="car__price"><b>Tarif du jour</b><span>affiché sur l\'annonce</span></p>' +
+          '<a class="btn btn--brand btn--sm" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Réserver sur Turo</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  var grid = document.getElementById('fleet-grid');
+  if (grid) grid.innerHTML = CARS.map(carCard).join('');
+
+  var reviewLinks = document.getElementById('review-links');
+  if (reviewLinks) {
+    reviewLinks.innerHTML = CARS.map(function (c) {
+      return '<a class="rev-link" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="rev-link__dot" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="rev-link__txt"><b>' + c.name + ' ' + c.variant.toLowerCase() + '</b>' +
+        '<span>Voir les avis et les disponibilités sur Turo</span></span>' +
+        '<span class="rev-link__go" aria-hidden="true">↗</span></a>';
+    }).join('');
+  }
+
+  var finalCta = document.getElementById('final-cta');
+  if (finalCta) {
+    finalCta.innerHTML = CARS.map(function (c, i) {
+      return '<a class="btn btn--lg ' + (i === 0 ? 'btn--onDeep' : 'btn--onDeepGhost') + '" href="' + c.turo +
+        '" target="_blank" rel="noopener noreferrer">La ' + c.variant.toLowerCase() + ' <span aria-hidden="true">↗</span></a>';
+    }).join('');
+  }
+
+  var footCars = document.getElementById('foot-cars');
+  if (footCars) {
+    footCars.innerHTML = CARS.map(function (c) {
+      return '<a href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Sandero ' + c.variant.toLowerCase() + ' ↗</a>';
+    }).join('');
+  }
+
+  /* ------------- 5. Sélecteur de réservation (renvoi vers Turo) ---------- */
+  var picker = document.getElementById('picker');
+  var cta = document.getElementById('cta-turo');
+  var inDep = document.getElementById('depart');
+  var inRet = document.getElementById('retour');
+  var outDays = document.getElementById('est-days');
+  var outDetail = document.getElementById('est-detail');
+  var selected = CARS[0].id;
+
+  function selectedCar() {
+    return CARS.filter(function (c) { return c.id === selected; })[0] || CARS[0];
+  }
+
+  function renderPicker() {
+    if (!picker) return;
+    picker.innerHTML = CARS.map(function (c) {
+      return '<button type="button" role="radio" class="pick" data-id="' + c.id + '" aria-checked="' + (c.id === selected) + '">' +
+        '<span class="pick__swatch" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="pick__txt"><b>' + c.name + '</b><span>' + c.variant + ' · Cergy</span></span></button>';
+    }).join('');
+    picker.querySelectorAll('.pick').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        selected = btn.dataset.id;
+        renderPicker();
+        syncCta();
+      });
+    });
+  }
+
+  function syncCta() {
+    var c = selectedCar();
+    if (cta) {
+      cta.href = c.turo;
+      cta.textContent = 'Voir les dates de la ' + c.variant.toLowerCase() + ' sur Turo';
+    }
+  }
+
+  function iso(d) { return d.toISOString().slice(0, 10); }
+
+  if (inDep && inRet) {
+    var today = new Date();
+    inDep.value = iso(new Date(today.getTime() + 2 * 864e5));
+    inRet.value = iso(new Date(today.getTime() + 5 * 864e5));
+    inDep.min = iso(today);
+    inRet.min = inDep.value;
+  }
+
+  function updateDuration() {
+    if (!inDep || !inRet || !outDays) return;
+    var d1 = new Date(inDep.value), d2 = new Date(inRet.value);
+    if (isNaN(d1) || isNaN(d2) || d2 <= d1) {
+      outDays.textContent = '—';
+      outDetail.textContent = 'La date de retour doit être postérieure à la date de départ.';
+      return;
+    }
+    var days = Math.max(1, Math.round((d2 - d1) / 864e5));
+    outDays.textContent = days + ' j';
+    outDetail.textContent = 'Du ' + d1.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' au ' + d2.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' — dates et tarif du jour à confirmer sur Turo.';
+  }
+
+  if (inDep) {
+    inDep.addEventListener('change', function () {
+      if (inRet) {
+        inRet.min = inDep.value;
+        if (inRet.value <= inDep.value) inRet.value = iso(new Date(new Date(inDep.value).getTime() + 864e5));
+      }
+      updateDuration();
+    });
+  }
+  if (inRet) inRet.addEventListener('change', updateDuration);
+
+  renderPicker();
+  syncCta();
+  updateDuration();
+
+})();
+</script>
