@@ -1,11 +1,12 @@
 # TBConnect — site vitrine location de voiture
 
-Site vitrine statique (HTML/CSS/JS, sans dépendance ni build) pour l'agence de
-location de véhicules **TBConnect**. La structure reprend les codes des landing
-pages SaaS type SuperHote — hero + preuve sociale, comparatif avant/après,
-sections produit, chiffres, avis, formules, FAQ, CTA final — appliqués au monde
-de la location : moteur de réservation, flotte filtrable, franchises et
-kilométrages.
+Site vitrine statique (HTML/CSS/JS, sans dépendance ni build) pour **TBConnect** :
+deux Dacia Sandero en location à Cergy (95). Le site ne prend aucune réservation
+lui-même — chaque bouton renvoie vers l'annonce Turo de la voiture concernée, qui
+gère le paiement, l'assurance, l'assistance et les avis. La structure reprend les
+codes des landing pages SaaS type SuperHote (hero, comparatif avant/après,
+sections produit, méthode, FAQ, CTA final), appliqués à une flotte de deux
+voitures.
 
 ## Aperçu
 
@@ -18,12 +19,15 @@ kilométrages.
 
 ## Fonctionnalités
 
-- **Moteur de réservation** dans le hero : agence, dates, catégorie → estimation
-  TTC calculée en direct (dégressivité −8 % dès 3 jours, −15 % dès 7 jours,
-  livraison +39 €). La validation filtre la flotte sur la catégorie choisie.
-- **Flotte filtrable** : 14 véhicules, 6 catégories, fiches techniques
-  (boîte, énergie, places, coffre) et silhouettes SVG générées en primitives
-  géométriques, teintées par catégorie et compatibles avec les deux thèmes.
+- **Sélecteur de réservation** dans le hero : choix de la voiture (bleue ou
+  blanche) et des dates souhaitées, durée calculée en direct, puis redirection
+  vers la bonne annonce Turo. Aucun tarif n'est affiché sur le site : il est
+  dynamique et fait foi sur Turo.
+- **Fiches véhicules** : boîte, énergie, places, coffre, et silhouettes SVG
+  générées en primitives géométriques, teintées à la couleur réelle de chaque
+  voiture et compatibles avec les deux thèmes.
+- **Avis** : pas de témoignage écrit sur le site, uniquement des liens vers les
+  avis publics et vérifiés de chaque annonce Turo.
 - **Traînées lumineuses** en `<canvas>` sous le hero (désactivées si l'utilisateur
   a demandé moins d'animations).
 - **FAQ** en `<details>` natifs, menu mobile, plaque d'immatriculation comme logo.
@@ -50,11 +54,23 @@ Regénérer la version mono-fichier après une modification :
 ./build/make-artifact.sh
 ```
 
-## À personnaliser avant mise en ligne
+## Source de vérité : le tableau `CARS`
 
-Le contenu est rédigé, pas générique, mais il reste à remplacer par les données
-réelles de l'agence : numéro de téléphone (`01 00 00 00 00`), adresse et
-horaires des quatre agences, e-mail de contact, tarifs et catalogue de la flotte
-(tableau `FLEET` dans `assets/js/app.js`), avis clients, et les pages légales
-listées en pied de page. Le formulaire de réservation ne fait aujourd'hui
-qu'estimer un tarif : il faudra le brancher sur un back-office ou un e-mail.
+Les deux voitures sont décrites une seule fois, en haut de `assets/js/app.js`.
+Ce tableau alimente le sélecteur du hero, les fiches, les liens d'avis, le CTA
+final et le pied de page — les liens Turo n'existent qu'à cet endroit.
+
+## À vérifier avant mise en ligne
+
+Les liens Turo sont ceux fournis par le propriétaire ; Turo bloquant la lecture
+automatique de ses pages, les caractéristiques n'ont **pas** pu être recopiées
+depuis les annonces. À confirmer dans `CARS` avant publication :
+
+- boîte de vitesses (`Manuelle` par défaut) et énergie (`Essence` par défaut,
+  à corriger si l'une des voitures est en GPL Eco-G) ;
+- volume de coffre (`328 L`, valeur catalogue de la Sandero III) ;
+- millésime, si vous souhaitez l'afficher à côté du modèle.
+
+Restent également à compléter : le point de rendez-vous exact à Cergy, les
+communes réellement desservies en livraison, et un moyen de contact direct si
+vous ne voulez pas tout faire passer par la messagerie Turo.

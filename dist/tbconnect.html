@@ -31,6 +31,10 @@
   --good:#0E7C55;
   --good-bg:#E4F6EE;
 
+  --car-blue:#2E63D8;
+  --car-white:#E3E7F2;
+  --car-stroke:#AEB6CD;
+
   --dark-ground:#0A0C18;
   --dark-ink:#F2F3FB;
 
@@ -70,6 +74,10 @@
     --good:#4ED4A0;
     --good-bg:#0F2A22;
 
+    --car-blue:#6E97FF;
+    --car-white:#E9EDF8;
+    --car-stroke:#7A83A6;
+
     --dark-ground:#05060D;
     --dark-ink:#F2F3FB;
 
@@ -100,6 +108,10 @@
   --signal-bg:#2A2013;
   --good:#4ED4A0;
   --good-bg:#0F2A22;
+
+  --car-blue:#6E97FF;
+  --car-white:#E9EDF8;
+  --car-stroke:#7A83A6;
 
   --dark-ground:#05060D;
   --dark-ink:#F2F3FB;
@@ -235,13 +247,11 @@ em{font-style:normal;color:var(--accent)}
 .proof p{font-size:14.5px;color:var(--muted)}
 .proof p strong{color:var(--ink);font-family:var(--f-mono)}
 .proof p span{display:block}
-.proof__faces{display:flex}
-.proof__faces span{
-  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin-right:-9px;
-  background:var(--surface-3);border:2px solid var(--ground);color:var(--ink-2);
-  font:600 11px/1 var(--f-mono);
+.proof__mark{
+  flex-shrink:0;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);
+  font:600 16px/1 var(--f-mono);
 }
-.proof__faces span:last-child{background:var(--accent-soft);color:var(--accent)}
 
 /* Moteur de réservation */
 .book{
@@ -275,6 +285,19 @@ em{font-style:normal;color:var(--accent)}
 .estimate__price small{font:500 12px/1 var(--f-mono);color:var(--muted)}
 .estimate__detail{font-size:13px;color:var(--ink-2);margin-top:8px}
 .book__note{text-align:center;font-size:12.5px;color:var(--muted)}
+
+.picker{display:grid;gap:9px}
+.pick{
+  display:flex;align-items:center;gap:13px;text-align:left;cursor:pointer;
+  padding:13px 14px;border-radius:var(--r);border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink);transition:border-color .16s,background-color .16s;
+}
+.pick:hover{border-color:var(--accent)}
+.pick[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px var(--accent-soft)}
+.pick__swatch{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.pick__txt{display:grid;gap:2px;font-family:var(--f-body)}
+.pick__txt b{font-size:15px;font-weight:600}
+.pick__txt span{font-size:12.5px;color:var(--muted)}
 
 /* ---------- 6. Marques ---------- */
 .marques{padding-block:34px;border-block:1px solid var(--line)}
@@ -341,6 +364,8 @@ em{font-style:normal;color:var(--accent)}
 .car__foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .car__price b{font:600 26px/1 var(--f-mono);letter-spacing:-.03em}
 .car__price span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.fleet__grid--duo{grid-template-columns:repeat(2,1fr);max-width:840px}
+.fleet__grid--duo .car__vis{height:184px}
 .fleet__note{margin-top:26px;font-size:14px;color:var(--muted)}
 
 /* ---------- 9. Inclus ---------- */
@@ -389,6 +414,18 @@ em{font-style:normal;color:var(--accent)}
 /* ---------- 13. Avis ---------- */
 .reviews__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .review{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;gap:16px;align-content:start}
+.reviews__links{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:840px}
+.rev-link{
+  display:flex;align-items:center;gap:15px;text-decoration:none;
+  padding:20px 22px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.rev-link:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow)}
+.rev-link__dot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.rev-link__txt{display:grid;gap:3px}
+.rev-link__txt b{font-family:var(--f-display);font-size:17px;letter-spacing:-.02em}
+.rev-link__txt span{font-size:13.5px;color:var(--muted)}
+.rev-link__go{margin-left:auto;font-family:var(--f-mono);color:var(--accent);font-size:18px}
 .stars{color:var(--signal);letter-spacing:.14em;font-size:15px}
 .review blockquote{margin:0;font-size:16px;line-height:1.55;color:var(--ink)}
 .review figcaption{display:grid;gap:4px;padding-top:16px;border-top:1px solid var(--line)}
@@ -433,6 +470,8 @@ em{font-style:normal;color:var(--accent)}
 .foot__in{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;padding-top:56px;border-top:1px solid rgba(255,255,255,.1)}
 .foot__brand p{margin-top:16px;max-width:34ch;line-height:1.6}
 .foot__col{display:grid;gap:10px;align-content:start}
+.foot__col>div{display:grid;gap:10px}
+.foot__col p{line-height:1.6}
 .foot h3{color:#fff;font-size:14px;letter-spacing:.02em;margin-bottom:4px}
 .foot a{text-decoration:none;transition:color .16s}
 .foot a:hover{color:#fff}
@@ -444,7 +483,7 @@ em{font-style:normal;color:var(--accent)}
   .hero__in{grid-template-columns:1fr;gap:40px}
   .book{max-width:520px}
   .fleet__grid,.incl__grid,.how__list,.plans__grid{grid-template-columns:repeat(2,1fr)}
-  .reviews__grid,.spots__grid,.stats__in{grid-template-columns:repeat(2,1fr)}
+  .reviews__grid,.reviews__links,.spots__grid,.stats__in{grid-template-columns:repeat(2,1fr)}
   .foot__in{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
@@ -459,7 +498,7 @@ em{font-style:normal;color:var(--accent)}
   .burger{display:block}
   .tel,.theme__label{display:none}
   .theme{padding:9px}
-  .compare__grid,.fleet__grid,.incl__grid,.how__list,.plans__grid,.reviews__grid,.spots__grid{grid-template-columns:1fr}
+  .compare__grid,.fleet__grid,.fleet__grid--duo,.incl__grid,.how__list,.plans__grid,.reviews__grid,.reviews__links,.spots__grid{grid-template-columns:1fr}
   .marques__list{margin-left:0}
   .sec-head{margin-bottom:36px}
   .stats__in{gap:22px 18px}
@@ -472,7 +511,7 @@ em{font-style:normal;color:var(--accent)}
 }
 </style>
 <!-- ARTIFACT:BODY:START -->
-<a class="skip" href="#flotte">Aller à la flotte</a>
+<a class="skip" href="#voitures">Aller aux voitures</a>
 
 <header class="nav" id="top">
   <div class="wrap nav__in">
@@ -482,10 +521,10 @@ em{font-style:normal;color:var(--accent)}
     </a>
 
     <nav class="nav__links" aria-label="Navigation principale">
-      <a href="#flotte">Flotte</a>
+      <a href="#voitures">Les voitures</a>
       <a href="#methode">Comment ça marche</a>
-      <a href="#formules">Formules</a>
-      <a href="#avis">Avis</a>
+      <a href="#inclus">Ce qui est inclus</a>
+      <a href="#zone">Où récupérer</a>
       <a href="#faq">FAQ</a>
     </nav>
 
@@ -493,7 +532,6 @@ em{font-style:normal;color:var(--accent)}
       <button class="theme" id="theme" type="button" aria-label="Changer de thème">
         <span class="theme__dot" aria-hidden="true"></span><span class="theme__label">Thème</span>
       </button>
-      <a class="tel" href="tel:+33100000000">01 00 00 00 00</a>
       <a class="btn btn--primary btn--sm" href="#reserver">Réserver</a>
       <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span>
@@ -509,83 +547,69 @@ em{font-style:normal;color:var(--accent)}
   <canvas class="hero__road" id="road" aria-hidden="true"></canvas>
   <div class="wrap hero__in">
     <div class="hero__copy">
-      <p class="eyebrow">Location de voitures · Paris &amp; Île-de-France</p>
-      <h1>La location de voiture,<br><em>sans paperasse ni surprise.</em></h1>
-      <p class="lead">Réservez en trois clics, récupérez vos clés en cinq minutes. Assurance tous risques, kilomètres inclus et assistance 24 h/24 — dans <strong>chaque</strong> tarif, pas en option.</p>
+      <p class="eyebrow">Location entre particuliers · Cergy · Val-d'Oise</p>
+      <h1>Deux Dacia Sandero à Cergy,<br><em>prêtes à partir.</em></h1>
+      <p class="lead">Pas de comptoir, pas de file d'attente, pas de vendeur d'options. Vous réservez sur <strong>Turo</strong>, je vous remets les clés à Cergy — ou je vous livre. Assurance et assistance comprises dans la location.</p>
 
       <div class="hero__cta">
-        <a class="btn btn--primary" href="#reserver">Réserver ma voiture</a>
-        <a class="btn btn--ghost" href="#flotte">Voir les 6 catégories</a>
+        <a class="btn btn--primary" href="#reserver">Réserver une Sandero</a>
+        <a class="btn btn--ghost" href="#methode">Comment ça marche</a>
       </div>
 
       <ul class="trust">
-        <li>Annulation gratuite jusqu'à 24 h avant</li>
-        <li>Empreinte bancaire, sans caution encaissée</li>
-        <li>Dépannage inclus, partout en France</li>
+        <li>Assurance et assistance incluses via Turo</li>
+        <li>Remise des clés à Cergy, ou livraison</li>
+        <li>Paiement et contrat 100 % dans l'appli</li>
       </ul>
 
       <div class="proof">
-        <div class="proof__faces" aria-hidden="true">
-          <span>LM</span><span>AK</span><span>SD</span><span>YR</span><span>+</span>
-        </div>
-        <p><strong>4,9/5</strong> sur 1 240 avis — <span>1 800 clients par an nous confient leurs trajets</span></p>
+        <span class="proof__mark" aria-hidden="true">↗</span>
+        <p><strong>Réservation sur Turo</strong><span>La plateforme gère le paiement, l'assurance, l'assistance et les avis publics de chaque voiture.</span></p>
       </div>
     </div>
 
-    <!-- Moteur de réservation -->
-    <form class="book" id="reserver" novalidate>
+    <!-- Sélecteur de véhicule -> Turo -->
+    <div class="book" id="reserver">
       <div class="book__head">
-        <h2>Vérifier les disponibilités</h2>
-        <span class="tag tag--live">Réponse immédiate</span>
+        <h2>Choisir votre voiture</h2>
+        <span class="tag tag--live">Dispos en direct</span>
       </div>
 
-      <div class="field">
-        <label for="agence">Agence de départ</label>
-        <select id="agence" name="agence">
-          <option value="paris11">Paris 11e — 24 rue de la Roquette</option>
-          <option value="defense">La Défense — Parking Michelet</option>
-          <option value="orly">Aéroport Paris-Orly — Terminal 4</option>
-          <option value="cdg">Aéroport Roissy-CDG — Terminal 2F</option>
-          <option value="livraison">Livraison à mon adresse (+39 €)</option>
-        </select>
-      </div>
+      <div class="picker" id="picker" role="radiogroup" aria-label="Choisir une Dacia Sandero"></div>
 
       <div class="field-row">
         <div class="field">
-          <label for="depart">Départ</label>
+          <label for="depart">Départ souhaité</label>
           <input type="date" id="depart" name="depart">
         </div>
         <div class="field">
-          <label for="retour">Retour</label>
+          <label for="retour">Retour souhaité</label>
           <input type="date" id="retour" name="retour">
         </div>
       </div>
 
-      <div class="field">
-        <label for="categorie">Catégorie</label>
-        <select id="categorie" name="categorie"></select>
-      </div>
-
-      <div class="estimate" id="estimate" aria-live="polite">
+      <div class="estimate">
         <div class="estimate__line">
-          <span class="estimate__label">Estimation</span>
-          <span class="estimate__price"><b id="est-total">—</b> <small>TTC</small></span>
+          <span class="estimate__label">Durée</span>
+          <span class="estimate__price"><b id="est-days">—</b></span>
         </div>
-        <p class="estimate__detail" id="est-detail">Choisissez vos dates pour voir le tarif.</p>
+        <p class="estimate__detail" id="est-detail">Choisissez vos dates : elles seront à confirmer sur Turo, avec le tarif du jour.</p>
       </div>
 
-      <button class="btn btn--primary btn--full" type="submit">Voir les véhicules disponibles</button>
-      <p class="book__note">Sans engagement · Aucun paiement à cette étape</p>
-    </form>
+      <a class="btn btn--primary btn--full" id="cta-turo" href="#voitures" target="_blank" rel="noopener noreferrer">
+        Voir les dates sur Turo <span aria-hidden="true">↗</span>
+      </a>
+      <p class="book__note">Redirection vers l'annonce · Aucun paiement sur ce site</p>
+    </div>
   </div>
 </section>
 
-<!-- ============ BANDEAU MARQUES ============ -->
+<!-- ============ BANDEAU TURO ============ -->
 <section class="marques">
   <div class="wrap">
-    <p class="marques__label">Une flotte renouvelée tous les 18 mois</p>
+    <p class="marques__label">Tout passe par Turo, rien par téléphone</p>
     <ul class="marques__list">
-      <li>Renault</li><li>Peugeot</li><li>Volkswagen</li><li>Tesla</li><li>Dacia</li><li>BMW</li><li>Citroën</li>
+      <li>Paiement sécurisé</li><li>Assurance incluse</li><li>Assistance 24/7</li><li>Avis vérifiés</li><li>Contrat dans l'appli</li>
     </ul>
   </div>
 </section>
@@ -594,81 +618,80 @@ em{font-style:normal;color:var(--accent)}
 <section class="section compare" id="pourquoi">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">Le vrai sujet</p>
-      <h2>Un départ en week-end&nbsp;: <span class="strike">2 h de comptoir</span> ou 5 minutes.</h2>
-      <p class="sec-lead">Le même trajet, vécu chez une agence classique puis chez nous. Rien d'inventé : ce sont les cinq points qui reviennent dans tous les avis clients.</p>
+      <p class="eyebrow">Pourquoi ici plutôt qu'au comptoir</p>
+      <h2>Un départ le samedi matin&nbsp;: <span class="strike">une heure de guichet</span> ou dix minutes.</h2>
+      <p class="sec-lead">Le même week-end, vécu dans une agence de gare puis avec moi. Rien d'exagéré&nbsp;: ce sont les cinq points sur lesquels une petite flotte peut réellement faire mieux qu'un loueur classique.</p>
     </header>
 
     <div class="compare__grid">
       <article class="col col--old">
-        <h3><span class="col__badge">Agence classique</span></h3>
+        <h3><span class="col__badge">Agence de location classique</span></h3>
         <ul class="steps">
-          <li><span class="steps__t">08:40</span> File d'attente au comptoir, deux personnes devant vous</li>
-          <li><span class="steps__t">09:05</span> Assurance « recommandée » à 24 €/jour, à décider sur place</li>
-          <li><span class="steps__t">09:20</span> 1 500 € de caution bloqués sur la carte, libérés sous 21 jours</li>
-          <li><span class="steps__t">09:35</span> Forfait 150 km/jour, puis 0,45 € du kilomètre</li>
-          <li><span class="steps__t">Retour</span> État des lieux au crayon, rayure contestée trois semaines plus tard</li>
+          <li><span class="steps__t">Avant</span> Devis en ligne, puis un tarif différent au comptoir</li>
+          <li><span class="steps__t">Sur place</span> File d'attente, puis assurance complémentaire à signer</li>
+          <li><span class="steps__t">Caution</span> Plusieurs centaines d'euros bloqués sur la carte</li>
+          <li><span class="steps__t">Départ</span> Un véhicule attribué au hasard du parc disponible</li>
+          <li><span class="steps__t">Retour</span> Un état des lieux fait sans vous, contesté plus tard</li>
         </ul>
-        <p class="col__foot">Temps passé au comptoir&nbsp;: <b>1 h 12</b></p>
+        <p class="col__foot">Interlocuteur&nbsp;: <b>un guichet</b></p>
       </article>
 
       <article class="col col--new">
-        <h3><span class="col__badge col__badge--brand">Avec TBConnect</span></h3>
+        <h3><span class="col__badge col__badge--brand">Avec TBConnect sur Turo</span></h3>
         <ul class="steps">
-          <li><span class="steps__t">J-3</span> Réservation en ligne, permis scanné depuis le téléphone</li>
-          <li><span class="steps__t">J-1</span> Contrat signé électroniquement, tarif figé, tout est inclus</li>
-          <li><span class="steps__t">08:40</span> Code d'accès reçu par SMS, clés dans le boîtier</li>
-          <li><span class="steps__t">08:45</span> 34 photos horodatées prises par vous, dans l'appli</li>
-          <li><span class="steps__t">Retour</span> Empreinte levée automatiquement sous 48 h</li>
+          <li><span class="steps__t">Avant</span> Tarif, photos et avis publics sur l'annonce</li>
+          <li><span class="steps__t">Réservation</span> Compte vérifié par Turo, assurance déjà comprise</li>
+          <li><span class="steps__t">Départ</span> On se donne rendez-vous à Cergy, ou je livre</li>
+          <li><span class="steps__t">La voiture</span> Celle des photos, exactement — il n'y en a que deux</li>
+          <li><span class="steps__t">Retour</span> Photos horodatées dans l'appli, des deux côtés</li>
         </ul>
-        <p class="col__foot col__foot--good">Temps passé au comptoir&nbsp;: <b>5 min</b></p>
+        <p class="col__foot col__foot--good">Interlocuteur&nbsp;: <b>le propriétaire</b></p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============ FLOTTE ============ -->
-<section class="section fleet" id="flotte">
+<!-- ============ LES VOITURES ============ -->
+<section class="section fleet" id="voitures">
   <div class="wrap">
     <header class="sec-head sec-head--row">
       <div>
-        <p class="eyebrow">La flotte</p>
-        <h2>38 véhicules, six catégories, un seul tarif&nbsp;: celui affiché.</h2>
+        <p class="eyebrow">Les voitures</p>
+        <h2>Deux Dacia Sandero, entretenues par la même personne.</h2>
       </div>
-      <p class="sec-lead">Kilométrage illimité au-delà de trois jours, deuxième conducteur offert, plein d'essence ou charge à 80 % au départ.</p>
+      <p class="sec-lead">Petites à garer, sobres sur autoroute, assez coffrées pour un week-end à quatre. Le tarif du jour et les disponibilités s'affichent sur Turo.</p>
     </header>
 
-    <div class="chips" role="tablist" aria-label="Filtrer par catégorie" id="chips"></div>
-    <div class="fleet__grid" id="fleet-grid"></div>
-    <p class="fleet__note" id="fleet-note"></p>
+    <div class="fleet__grid fleet__grid--duo" id="fleet-grid"></div>
+    <p class="fleet__note">Les deux voitures sont basées à Cergy (95). Kilométrage inclus, carburant et options de livraison&nbsp;: détaillés sur chaque annonce.</p>
   </div>
 </section>
 
 <!-- ============ INCLUS ============ -->
-<section class="section incl">
+<section class="section incl" id="inclus">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">Inclus, vraiment</p>
-      <h2>Ce que les autres facturent en supplément.</h2>
+      <p class="eyebrow">Ce qui est inclus</p>
+      <h2>Ce qu'on ne vous facturera pas en supplément.</h2>
     </header>
     <ul class="incl__grid">
-      <li><h3>Assurance tous risques</h3><p>Franchise 900 €, rachetable à 6 €/jour. Bris de glace et pneus compris.</p></li>
-      <li><h3>Assistance 24 h/24</h3><p>Dépannage 0 km, remorquage et véhicule de remplacement partout en France.</p></li>
-      <li><h3>Deuxième conducteur</h3><p>Ajouté gratuitement au contrat, sur simple photo du permis.</p></li>
-      <li><h3>Kilomètres illimités</h3><p>Dès 3 jours de location. En dessous, 250 km par jour inclus.</p></li>
-      <li><h3>Nettoyage et désinfection</h3><p>Chaque véhicule passe 45 minutes en préparation entre deux clients.</p></li>
-      <li><h3>Annulation gratuite</h3><p>Jusqu'à 24 h avant le départ, remboursement intégral sous 3 jours.</p></li>
+      <li><h3>Assurance et assistance</h3><p>Comprises dans la réservation Turo, avec le niveau de protection que vous choisissez au moment de réserver.</p></li>
+      <li><h3>Voiture préparée</h3><p>Nettoyée intérieur et extérieur entre chaque location, pneus et niveaux vérifiés avant la remise des clés.</p></li>
+      <li><h3>Remise en main propre</h3><p>Rendez-vous à Cergy, à l'heure qui vous arrange, y compris tôt le matin ou en soirée.</p></li>
+      <li><h3>Livraison possible</h3><p>Gare, domicile ou bureau dans le Val-d'Oise et l'ouest francilien, sur demande avant la réservation.</p></li>
+      <li><h3>Un vrai interlocuteur</h3><p>Vous parlez au propriétaire, pas à un centre d'appels. Réponse dans la messagerie Turo, souvent dans l'heure.</p></li>
+      <li><h3>État des lieux partagé</h3><p>Photos horodatées prises par vous et par moi au départ comme au retour, conservées dans l'appli.</p></li>
     </ul>
   </div>
 </section>
 
-<!-- ============ CHIFFRES ============ -->
+<!-- ============ FAITS ============ -->
 <section class="stats">
   <div class="wrap stats__in">
-    <div><b>12</b><span>ans sur la route</span></div>
-    <div><b>1 800</b><span>locations par an</span></div>
-    <div><b>18</b><span>mois d'âge moyen du parc</span></div>
-    <div><b>4,9<small>/5</small></b><span>1 240 avis vérifiés</span></div>
+    <div><b>2</b><span>Dacia Sandero disponibles</span></div>
+    <div><b>95</b><span>basées à Cergy, Val-d'Oise</span></div>
+    <div><b>5</b><span>places et 5 portes</span></div>
+    <div><b>24<small>/7</small></b><span>assistance via Turo</span></div>
   </div>
 </section>
 
@@ -677,78 +700,47 @@ em{font-style:normal;color:var(--accent)}
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Comment ça marche</p>
-      <h2>Trois étapes, aucune imprimante.</h2>
+      <h2>Trois étapes, aucune paperasse.</h2>
     </header>
     <ol class="how__list">
       <li>
         <span class="how__n">01</span>
-        <h3>Vous réservez en ligne</h3>
-        <p>Dates, agence, catégorie. Le tarif affiché est le tarif final : il inclut l'assurance, l'assistance et la TVA.</p>
-        <p class="how__meta">≈ 3 minutes</p>
+        <h3>Vous réservez sur Turo</h3>
+        <p>Vous choisissez la voiture, vos dates et vos horaires directement sur l'annonce. Le tarif affiché est celui que vous payez, assurance comprise.</p>
+        <p class="how__meta">Depuis le site ou l'appli</p>
       </li>
       <li>
         <span class="how__n">02</span>
-        <h3>Vous envoyez permis et pièce d'identité</h3>
-        <p>Depuis votre téléphone. Validation par un conseiller en moins de deux heures ouvrées, contrat signé électroniquement.</p>
-        <p class="how__meta">≈ 2 h de validation</p>
+        <h3>Turo vérifie votre compte</h3>
+        <p>Permis et identité sont contrôlés par la plateforme, pas par moi. Je confirme la réservation et on convient du lieu de rendez-vous par message.</p>
+        <p class="how__meta">Généralement le jour même</p>
       </li>
       <li>
         <span class="how__n">03</span>
-        <h3>Vous récupérez les clés</h3>
-        <p>Code du boîtier envoyé par SMS le matin du départ, ou remise en main propre à l'agence si vous préférez.</p>
-        <p class="how__meta">≈ 5 minutes sur place</p>
+        <h3>On se retrouve à Cergy</h3>
+        <p>Tour du véhicule ensemble, photos dans l'appli, clés en main. Au retour, même chose dans l'autre sens — dix minutes montre en main.</p>
+        <p class="how__meta">Ou livraison, sur demande</p>
       </li>
     </ol>
   </div>
 </section>
 
-<!-- ============ FORMULES ============ -->
-<section class="section plans" id="formules">
+<!-- ============ ZONE ============ -->
+<section class="section spots" id="zone">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">Formules</p>
-      <h2>Trois niveaux de tranquillité.</h2>
-      <p class="sec-lead">La formule s'ajoute au tarif du véhicule. Elle est modifiable jusqu'au départ, jamais après.</p>
+    <header class="sec-head sec-head--row">
+      <div>
+        <p class="eyebrow">Où récupérer la voiture</p>
+        <h2>À Cergy, ou là où vous êtes.</h2>
+      </div>
+      <p class="sec-lead">La remise des clés à Cergy est gratuite. Pour une livraison ailleurs, demandez-moi avant de réserver : je vous confirme la faisabilité et le supplément éventuel.</p>
     </header>
-
-    <div class="plans__grid">
-      <article class="plan">
-        <h3>Essentiel</h3>
-        <p class="plan__price"><b>Inclus</b><span>dans chaque location</span></p>
-        <ul class="plan__list">
-          <li>Tous risques, franchise 900 €</li>
-          <li>Assistance 24 h/24, 0 km</li>
-          <li>2ᵉ conducteur offert</li>
-          <li>250 km/jour</li>
-        </ul>
-        <a class="btn btn--ghost btn--full" href="#reserver">Réserver</a>
-      </article>
-
-      <article class="plan plan--feat">
-        <span class="plan__flag">Le plus choisi</span>
-        <h3>Confort</h3>
-        <p class="plan__price"><b>+6 €</b><span>par jour</span></p>
-        <ul class="plan__list">
-          <li>Franchise réduite à 300 €</li>
-          <li>Kilométrage illimité dès J1</li>
-          <li>Retour tardif toléré (2 h)</li>
-          <li>Siège enfant ou GPS offert</li>
-        </ul>
-        <a class="btn btn--primary btn--full" href="#reserver">Réserver</a>
-      </article>
-
-      <article class="plan">
-        <h3>Zen</h3>
-        <p class="plan__price"><b>+14 €</b><span>par jour</span></p>
-        <ul class="plan__list">
-          <li>Franchise 0 €, sans exclusion</li>
-          <li>Livraison et reprise à domicile</li>
-          <li>Plein d'essence non facturé</li>
-          <li>Véhicule de remplacement en 3 h</li>
-        </ul>
-        <a class="btn btn--ghost btn--full" href="#reserver">Réserver</a>
-      </article>
-    </div>
+    <ul class="spots__grid">
+      <li><b>Cergy</b><span>Point de rendez-vous convenu par message</span><span class="mono">Inclus</span></li>
+      <li><b>Cergy-Préfecture</b><span>RER A et gare routière, à pied</span><span class="mono">Inclus</span></li>
+      <li><b>Val-d'Oise</b><span>Pontoise, Osny, Éragny, Saint-Ouen-l'Aumône…</span><span class="mono">Sur demande</span></li>
+      <li><b>Aéroports</b><span>Roissy-CDG et Beauvais</span><span class="mono">Sur demande</span></li>
+    </ul>
   </div>
 </section>
 
@@ -756,50 +748,11 @@ em{font-style:normal;color:var(--accent)}
 <section class="section reviews" id="avis">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">Avis clients</p>
-      <h2>Ce qu'on nous dit au retour des clés.</h2>
+      <p class="eyebrow">Avis</p>
+      <h2>Les avis sont chez Turo, pas chez moi.</h2>
+      <p class="sec-lead">Impossible de les trier ou de les réécrire&nbsp;: chaque locataire note la voiture après son trajet, et tout est public sur l'annonce. Le plus simple est d'aller les lire à la source.</p>
     </header>
-    <div class="reviews__grid">
-      <figure class="review">
-        <p class="stars" aria-label="5 sur 5">★★★★★</p>
-        <blockquote>« Départ à 6 h du matin un dimanche, clés dans le boîtier, aucune attente. Le devis annoncé était exactement celui prélevé. »</blockquote>
-        <figcaption><b>Leïla M.</b><span>Clio V · 4 jours · Orly</span></figcaption>
-      </figure>
-      <figure class="review">
-        <p class="stars" aria-label="5 sur 5">★★★★★</p>
-        <blockquote>« J'ai loué un utilitaire pour un déménagement, livré devant chez moi à 8 h. Le hayon et les sangles étaient déjà dedans. »</blockquote>
-        <figcaption><b>Anis K.</b><span>Boxer L2H2 · 1 jour · Paris 11e</span></figcaption>
-      </figure>
-      <figure class="review">
-        <p class="stars" aria-label="5 sur 5">★★★★★</p>
-        <blockquote>« Une éraflure au retour, réglée en dix minutes avec les photos de l'appli. Zéro discussion, zéro mauvaise foi. »</blockquote>
-        <figcaption><b>Sophie D.</b><span>3008 · 9 jours · La Défense</span></figcaption>
-      </figure>
-      <figure class="review">
-        <p class="stars" aria-label="5 sur 5">★★★★★</p>
-        <blockquote>« Première fois en électrique, le conseiller m'a appelé pour expliquer la recharge. Badge fourni, 380 km réels sur autoroute. »</blockquote>
-        <figcaption><b>Yanis R.</b><span>Model 3 · 3 jours · Roissy-CDG</span></figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============ AGENCES ============ -->
-<section class="section spots">
-  <div class="wrap">
-    <header class="sec-head sec-head--row">
-      <div>
-        <p class="eyebrow">Nos points de retrait</p>
-        <h2>Quatre agences, ou devant votre porte.</h2>
-      </div>
-      <p class="sec-lead">Livraison à domicile ou au bureau dans un rayon de 30 km autour de Paris, sept jours sur sept, de 7 h à 21 h.</p>
-    </header>
-    <ul class="spots__grid">
-      <li><b>Paris 11ᵉ</b><span>24 rue de la Roquette</span><span class="mono">Lun–Sam · 8 h–19 h</span></li>
-      <li><b>La Défense</b><span>Parking Michelet, niveau -2</span><span class="mono">Lun–Ven · 7 h–20 h</span></li>
-      <li><b>Paris-Orly</b><span>Terminal 4, navette N2</span><span class="mono">7j/7 · 6 h–23 h</span></li>
-      <li><b>Roissy-CDG</b><span>Terminal 2F, niveau arrivées</span><span class="mono">7j/7 · 6 h–23 h</span></li>
-    </ul>
+    <div class="reviews__links" id="review-links"></div>
   </div>
 </section>
 
@@ -808,41 +761,45 @@ em{font-style:normal;color:var(--accent)}
   <div class="wrap wrap--narrow">
     <header class="sec-head">
       <p class="eyebrow">Questions fréquentes</p>
-      <h2>Tout ce qu'on nous demande avant de réserver.</h2>
+      <h2>Ce qu'on me demande avant de réserver.</h2>
     </header>
 
     <div class="faq__list">
       <details open>
-        <summary>Quel âge et quelle ancienneté de permis faut-il ?</summary>
-        <p>21 ans et 2 ans de permis pour les citadines et berlines, 25 ans et 3 ans pour les catégories Premium et Utilitaire. Aucun supplément « jeune conducteur » n'est appliqué.</p>
+        <summary>Faut-il un compte Turo pour louer ?</summary>
+        <p>Oui. La réservation, le paiement, l'assurance et le contrat passent par Turo — c'est ce qui remplace le comptoir et la paperasse. La création du compte prend quelques minutes et sert à vérifier votre permis et votre identité.</p>
       </details>
       <details>
-        <summary>Faut-il déposer une caution ?</summary>
-        <p>Nous réalisons une empreinte bancaire de 900 € (300 € en formule Confort, aucune en formule Zen). Aucun montant n'est débité : l'empreinte est levée automatiquement sous 48 h après la restitution.</p>
+        <summary>Quelles conditions d'âge et de permis ?</summary>
+        <p>Ce sont celles de Turo : votre profil est approuvé par la plateforme au moment de l'inscription, en fonction de votre âge et de l'ancienneté de votre permis. Si votre compte est validé, vous pouvez réserver.</p>
+      </details>
+      <details>
+        <summary>Y a-t-il une caution à déposer ?</summary>
+        <p>Aucune caution ne m'est versée en main propre. La protection choisie sur Turo au moment de la réservation détermine votre part en cas de dommage&nbsp;; tout est indiqué sur la page de paiement, avant de valider.</p>
       </details>
       <details>
         <summary>Combien de kilomètres sont inclus ?</summary>
-        <p>250 km par jour pour une location de 1 à 2 jours, kilométrage illimité à partir de 3 jours. Au-delà du forfait, le kilomètre supplémentaire est facturé 0,19 € — c'est la moitié du tarif habituel du marché.</p>
+        <p>Le forfait kilométrique et le prix du kilomètre supplémentaire sont affichés sur chaque annonce, et varient avec la durée de la location. Pour un long trajet, dites-le-moi avant&nbsp;: on ajuste plutôt que de découvrir un dépassement au retour.</p>
       </details>
       <details>
-        <summary>Puis-je partir à l'étranger ?</summary>
-        <p>Oui, dans l'Union européenne, en Suisse et au Royaume-Uni, en nous prévenant 48 h avant. La carte verte est mise à jour gratuitement. Le Maghreb et les Balkans ne sont pas couverts par notre assureur.</p>
+        <summary>Comment se passe le carburant ?</summary>
+        <p>Vous récupérez la voiture avec un certain niveau et la rendez au même niveau. La station la plus proche du point de rendez-vous vous est indiquée dans le message de départ.</p>
       </details>
       <details>
-        <summary>Comment se passe le retour hors horaires ?</summary>
-        <p>Vous garez le véhicule sur la place réservée de l'agence et déposez les clés dans le boîtier sécurisé. L'état des lieux est réalisé le lendemain matin, à partir de vos photos horodatées et des nôtres.</p>
+        <summary>Puis-je être livré ou récupérer la voiture en gare ?</summary>
+        <p>À Cergy-Préfecture, oui, sans supplément. Ailleurs dans le Val-d'Oise, à Roissy ou à Beauvais, écrivez-moi avant de réserver&nbsp;: je vous confirme le créneau et le supplément éventuel.</p>
       </details>
       <details>
-        <summary>Que se passe-t-il en cas de panne ou d'accident ?</summary>
-        <p>Un seul numéro, joignable 24 h/24, y compris les jours fériés. Dépannage dès le premier kilomètre, et véhicule de remplacement de catégorie équivalente sous 3 h en Île-de-France, sous 24 h ailleurs en France.</p>
+        <summary>Et si je suis en retard au retour ?</summary>
+        <p>Prévenez-moi par message dès que vous le savez. Tant que la voiture n'est pas réservée derrière vous, on trouve un arrangement&nbsp;; les prolongations se font en deux clics dans l'appli.</p>
       </details>
       <details>
-        <summary>Acceptez-vous les paiements en plusieurs fois ?</summary>
-        <p>Oui, en 3 fois sans frais dès 300 € de location, par carte bancaire. Les cartes prépayées et les cartes à débit différé virtuelles ne sont pas acceptées pour l'empreinte.</p>
+        <summary>Que faire en cas de panne ou d'accident ?</summary>
+        <p>L'assistance Turo est joignable 24 h/24 depuis l'appli, et je reste évidemment atteignable en parallèle. Ne faites rien réparer sans nous prévenir&nbsp;: la prise en charge passe par la plateforme.</p>
       </details>
       <details>
-        <summary>Les véhicules électriques sont-ils livrés chargés ?</summary>
-        <p>Toujours à 80 % minimum, avec un badge de recharge multi-réseaux inclus. Vous restituez le véhicule au même niveau ; en dessous, la recharge est refacturée au tarif réel de l'opérateur, sans marge.</p>
+        <summary>Peut-on partir à l'étranger avec la voiture ?</summary>
+        <p>Demandez-moi avant de réserver&nbsp;: les sorties du territoire dépendent des conditions de Turo et de mon accord. Sans validation préalable, la voiture reste en France.</p>
       </details>
     </div>
   </div>
@@ -852,13 +809,10 @@ em{font-style:normal;color:var(--accent)}
 <section class="final">
   <div class="wrap final__in">
     <div>
-      <h2>Votre prochaine voiture est disponible ce week-end.</h2>
-      <p>Réservez en trois minutes, annulez gratuitement jusqu'à 24 h avant le départ.</p>
+      <h2>La Sandero est libre ce week-end.</h2>
+      <p>Vérifiez les dates sur Turo, réservez en deux minutes, on se retrouve à Cergy.</p>
     </div>
-    <div class="final__cta">
-      <a class="btn btn--light" href="#reserver">Réserver maintenant</a>
-      <a class="btn btn--outline" href="tel:+33100000000">01 00 00 00 00</a>
-    </div>
+    <div class="final__cta" id="final-cta"></div>
   </div>
 </section>
 
@@ -868,40 +822,69 @@ em{font-style:normal;color:var(--accent)}
   <div class="wrap foot__in">
     <div class="foot__brand">
       <span class="plate plate--lg" aria-hidden="true"><span class="plate__eu">F</span><span class="plate__txt">TB-CONNECT</span></span>
-      <p>Location de véhicules de tourisme et utilitaires en Île-de-France. Agence indépendante, flotte en propre, équipe joignable par un vrai téléphone.</p>
+      <p>Deux Dacia Sandero en location à Cergy, dans le Val-d'Oise. Réservation, assurance et assistance gérées par Turo. Un seul propriétaire, joignable dans la messagerie.</p>
     </div>
-    <nav class="foot__col" aria-label="Louer">
-      <h3>Louer</h3>
-      <a href="#flotte">Citadines</a><a href="#flotte">Berlines</a><a href="#flotte">SUV</a><a href="#flotte">Utilitaires</a><a href="#flotte">Électriques</a>
+    <nav class="foot__col" aria-label="Les voitures">
+      <h3>Les voitures</h3>
+      <div id="foot-cars"></div>
     </nav>
-    <nav class="foot__col" aria-label="Agence">
-      <h3>Agence</h3>
-      <a href="#methode">Comment ça marche</a><a href="#formules">Formules</a><a href="#avis">Avis clients</a><a href="#faq">FAQ</a>
+    <nav class="foot__col" aria-label="Infos pratiques">
+      <h3>Infos pratiques</h3>
+      <a href="#methode">Comment ça marche</a><a href="#inclus">Ce qui est inclus</a><a href="#zone">Où récupérer</a><a href="#faq">FAQ</a>
     </nav>
     <div class="foot__col">
       <h3>Contact</h3>
-      <a href="tel:+33100000000">01 00 00 00 00</a>
-      <a href="mailto:contact@tbconnect.fr">contact@tbconnect.fr</a>
-      <p class="mono">24 rue de la Roquette<br>75011 Paris</p>
+      <p>Le plus rapide reste la messagerie Turo, depuis l'une des deux annonces&nbsp;: les réponses y sont horodatées et la réservation suit derrière.</p>
     </div>
   </div>
   <div class="wrap foot__legal">
-    <p>© <span id="year">2026</span> TBConnect — Tous droits réservés.</p>
-    <p>Mentions légales · CGV · Politique de confidentialité · Cookies</p>
+    <p>© <span id="year">2026</span> TBConnect — Cergy (95)</p>
+    <p>Site indépendant. Turo est une marque de Turo Inc., utilisée ici pour désigner la plateforme de réservation.</p>
   </div>
 </footer>
 <!-- ARTIFACT:BODY:END -->
 <script>
 /* ==========================================================================
    TBConnect — interactions du site vitrine
-   1. Thème  2. Navigation  3. Flotte (données + rendu + filtre)
-   4. Moteur de réservation  5. Traînées lumineuses du hero
+   1. Données  2. Thème  3. Navigation  4. Silhouettes + rendu
+   5. Sélecteur de réservation (renvoi vers Turo)  6. Traînées du hero
    ========================================================================== */
 (function () {
   'use strict';
 
-  /* ------------------------------ 1. Thème ------------------------------ */
+  /* ------------------------------ 1. Données ---------------------------- */
+  /* Une seule source de vérité : modifier ici met à jour le sélecteur du hero,
+     les fiches, les liens d'avis, le CTA final et le pied de page. */
+  var CARS = [
+    {
+      id: 'bleue',
+      name: 'Dacia Sandero',
+      variant: 'Bleue',
+      color: 'var(--car-blue)',
+      swatch: 'var(--car-blue)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3887182',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    },
+    {
+      id: 'blanche',
+      name: 'Dacia Sandero',
+      variant: 'Blanche',
+      color: 'var(--car-white)',
+      swatch: 'var(--car-white)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3876979',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    }
+  ];
+
   var root = document.documentElement;
+
+  /* ------------------------------- 2. Thème ----------------------------- */
   var stored = null;
   try { stored = localStorage.getItem('tbc-theme'); } catch (e) { /* navigation privée */ }
   if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
@@ -922,7 +905,7 @@ em{font-style:normal;color:var(--accent)}
     });
   }
 
-  /* --------------------------- 2. Navigation ---------------------------- */
+  /* ---------------------------- 3. Navigation --------------------------- */
   var nav = document.querySelector('.nav');
   var burger = document.getElementById('burger');
 
@@ -940,226 +923,162 @@ em{font-style:normal;color:var(--accent)}
     });
   }
 
-  var onScroll = function () {
+  window.addEventListener('scroll', function () {
     if (nav) nav.classList.toggle('is-stuck', window.scrollY > 8);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  }, { passive: true });
 
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ------------------------------ 3. Flotte ----------------------------- */
-  var CATEGORIES = [
-    { id: 'citadine',    label: 'Citadine',    price: 34,  tone: 'accent' },
-    { id: 'berline',     label: 'Berline',     price: 52,  tone: 'accent' },
-    { id: 'suv',         label: 'SUV',         price: 68,  tone: 'accent2' },
-    { id: 'utilitaire',  label: 'Utilitaire',  price: 59,  tone: 'ink' },
-    { id: 'electrique',  label: 'Électrique',  price: 62,  tone: 'good' },
-    { id: 'premium',     label: 'Premium',     price: 119, tone: 'accent2' }
-  ];
+  /* --------------------- 4. Silhouettes et rendu ------------------------ */
+  /* Silhouette construite en primitives géométriques, pas en tracé dessiné. */
+  function silhouette(color) {
+    var x1 = 26, x2 = 176, bodyTop = 48, roofTop = 20, bottom = 74, r = 15;
+    var roofX1 = x1 + 34, roofX2 = x2 - 26;
+    var roof = 'M' + roofX1 + ',' + bodyTop + ' L' + (roofX1 + 18) + ',' + roofTop +
+               ' L' + (roofX2 - 14) + ',' + roofTop + ' L' + roofX2 + ',' + bodyTop + ' Z';
+    var glass = 'M' + (roofX1 + 11) + ',' + (bodyTop - 6) + ' L' + (roofX1 + 25) + ',' + (roofTop + 9) +
+                ' L' + (roofX2 - 21) + ',' + (roofTop + 9) + ' L' + (roofX2 - 10) + ',' + (bodyTop - 6) + ' Z';
 
-  var FLEET = [
-    { cat:'citadine',   name:'Renault Clio V',        trim:'1.0 TCe 90',       price:34,  boite:'Manuelle',  energie:'Essence',    places:'5', coffre:'391 L' },
-    { cat:'citadine',   name:'Peugeot 208',           trim:'PureTech 100',     price:36,  boite:'Auto EAT8', energie:'Essence',    places:'5', coffre:'352 L' },
-    { cat:'citadine',   name:'Toyota Yaris',          trim:'Hybride 116h',     price:41,  boite:'Auto',      energie:'Hybride',    places:'5', coffre:'286 L' },
-    { cat:'berline',    name:'Peugeot 508',           trim:'BlueHDi 130',      price:52,  boite:'Auto EAT8', energie:'Diesel',     places:'5', coffre:'487 L' },
-    { cat:'berline',    name:'Volkswagen Passat SW',  trim:'2.0 TDI 150',      price:58,  boite:'Auto DSG',  energie:'Diesel',     places:'5', coffre:'650 L' },
-    { cat:'suv',        name:'Dacia Duster',          trim:'TCe 130 4x2',      price:49,  boite:'Manuelle',  energie:'Essence',    places:'5', coffre:'478 L' },
-    { cat:'suv',        name:'Peugeot 3008',          trim:'Hybrid 136',       price:68,  boite:'Auto e-DCS',energie:'Hybride',    places:'5', coffre:'520 L' },
-    { cat:'suv',        name:'Volkswagen T-Roc',      trim:'1.5 TSI 150',      price:64,  boite:'Auto DSG',  energie:'Essence',    places:'5', coffre:'445 L' },
-    { cat:'utilitaire', name:'Renault Trafic',        trim:'L1H1 · 6 m³',      price:59,  boite:'Manuelle',  energie:'Diesel',     places:'3', coffre:'6 m³' },
-    { cat:'utilitaire', name:'Peugeot Boxer',         trim:'L2H2 · 11,5 m³',   price:79,  boite:'Manuelle',  energie:'Diesel',     places:'3', coffre:'11,5 m³' },
-    { cat:'electrique', name:'Renault Mégane E-Tech', trim:'EV60 · 450 km',    price:62,  boite:'Auto',      energie:'100 % élec.',places:'5', coffre:'440 L' },
-    { cat:'electrique', name:'Tesla Model 3',         trim:'Propulsion · 513 km', price:89, boite:'Auto',   energie:'100 % élec.',places:'5', coffre:'594 L' },
-    { cat:'premium',    name:'BMW Série 5',           trim:'520d xDrive',      price:119, boite:'Auto',      energie:'Diesel',     places:'5', coffre:'520 L' },
-    { cat:'premium',    name:'Mercedes Classe E',     trim:'E 220 d AMG Line', price:139, boite:'Auto 9G',   energie:'Diesel',     places:'5', coffre:'540 L' }
-  ];
-
-  /* Silhouettes : construites en primitives (pas de tracé dessiné à la main) */
-  var SHAPES = {
-    citadine:   { x1: 30, x2: 172, bodyTop: 50, roofTop: 22, rf: 34, rr: 24, wf: 66, wr: 142, r: 15 },
-    berline:    { x1: 18, x2: 186, bodyTop: 52, roofTop: 26, rf: 44, rr: 40, wf: 60, wr: 150, r: 15 },
-    suv:        { x1: 24, x2: 180, bodyTop: 44, roofTop: 14, rf: 32, rr: 22, wf: 64, wr: 146, r: 18 },
-    utilitaire: { x1: 16, x2: 188, bodyTop: 46, roofTop: 12, rf: 26, rr: 4,  wf: 58, wr: 156, r: 16, box: true },
-    electrique: { x1: 20, x2: 184, bodyTop: 50, roofTop: 20, rf: 40, rr: 34, wf: 62, wr: 148, r: 16 },
-    premium:    { x1: 14, x2: 190, bodyTop: 54, roofTop: 28, rf: 50, rr: 44, wf: 58, wr: 152, r: 15 }
-  };
-
-  var TONE = { accent: 'var(--accent)', accent2: 'var(--accent-2)', good: 'var(--good)', ink: 'var(--ink-2)' };
-
-  function silhouette(cat) {
-    var s = SHAPES[cat] || SHAPES.berline;
-    var tone = TONE[(CATEGORIES.filter(function (c) { return c.id === cat; })[0] || {}).tone] || TONE.accent;
-    var bottom = 74;
-    var roofX1 = s.x1 + s.rf;
-    var roofX2 = s.x2 - s.rr;
-    var roof = 'M' + roofX1 + ',' + s.bodyTop +
-               ' L' + (roofX1 + (s.box ? 4 : 18)) + ',' + s.roofTop +
-               ' L' + (roofX2 - (s.box ? 2 : 14)) + ',' + s.roofTop +
-               ' L' + roofX2 + ',' + s.bodyTop + ' Z';
-    var glass = 'M' + (roofX1 + 11) + ',' + (s.bodyTop - 6) +
-                ' L' + (roofX1 + (s.box ? 12 : 25)) + ',' + (s.roofTop + 9) +
-                ' L' + (roofX2 - (s.box ? 10 : 21)) + ',' + (s.roofTop + 9) +
-                ' L' + (roofX2 - 10) + ',' + (s.bodyTop - 6) + ' Z';
-
-    return '<svg viewBox="0 0 200 100" role="img" aria-hidden="true" style="color:' + tone + '">' +
-      '<line x1="6" y1="' + (bottom + s.r) + '" x2="194" y2="' + (bottom + s.r) + '" stroke="var(--line-strong)" stroke-width="1.5" stroke-linecap="round"/>' +
-      '<path d="' + roof + '" fill="currentColor" opacity=".9"/>' +
-      '<rect x="' + s.x1 + '" y="' + s.bodyTop + '" width="' + (s.x2 - s.x1) + '" height="' + (bottom - s.bodyTop) + '" rx="' + (s.box ? 7 : 12) + '" fill="currentColor" opacity=".9"/>' +
-      '<path d="' + glass + '" fill="var(--surface)" opacity=".82"/>' +
-      '<rect x="' + (s.x2 - 9) + '" y="' + (s.bodyTop + 6) + '" width="7" height="6" rx="2" fill="var(--surface)" opacity=".7"/>' +
-      '<circle cx="' + s.wf + '" cy="' + bottom + '" r="' + s.r + '" fill="var(--ink)"/>' +
-      '<circle cx="' + s.wf + '" cy="' + bottom + '" r="' + Math.round(s.r * 0.42) + '" fill="var(--surface)"/>' +
-      '<circle cx="' + s.wr + '" cy="' + bottom + '" r="' + s.r + '" fill="var(--ink)"/>' +
-      '<circle cx="' + s.wr + '" cy="' + bottom + '" r="' + Math.round(s.r * 0.42) + '" fill="var(--surface)"/>' +
+    return '<svg viewBox="0 0 200 100" role="img" aria-hidden="true" style="color:' + color + '">' +
+      '<line x1="6" y1="' + (bottom + r) + '" x2="194" y2="' + (bottom + r) + '" stroke="var(--line-strong)" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="' + roof + '" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<rect x="' + x1 + '" y="' + bodyTop + '" width="' + (x2 - x1) + '" height="' + (bottom - bodyTop) + '" rx="12" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<path d="' + glass + '" fill="var(--surface)" opacity=".85"/>' +
+      '<rect x="' + (x2 - 9) + '" y="' + (bodyTop + 6) + '" width="7" height="6" rx="2" fill="var(--surface)" opacity=".7"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
       '</svg>';
   }
 
-  function catLabel(id) {
-    var c = CATEGORIES.filter(function (x) { return x.id === id; })[0];
-    return c ? c.label : id;
-  }
-
-  function carCard(v) {
+  function carCard(c) {
     return '<article class="car">' +
-      '<div class="car__vis"><span class="car__cat">' + catLabel(v.cat) + '</span>' + silhouette(v.cat) + '</div>' +
+      '<div class="car__vis"><span class="car__cat">Sandero ' + c.variant.toLowerCase() + '</span>' + silhouette(c.color) + '</div>' +
       '<div class="car__body">' +
-        '<div class="car__title"><h3>' + v.name + '</h3><span>' + v.trim + '</span></div>' +
+        '<div class="car__title"><h3>' + c.name + ' — ' + c.variant + '</h3><span>Cergy (95)</span></div>' +
         '<dl class="car__specs">' +
-          '<div><dt>Boîte</dt><dd>' + v.boite + '</dd></div>' +
-          '<div><dt>Énergie</dt><dd>' + v.energie + '</dd></div>' +
-          '<div><dt>Places</dt><dd>' + v.places + '</dd></div>' +
-          '<div><dt>Coffre</dt><dd>' + v.coffre + '</dd></div>' +
+          '<div><dt>Boîte</dt><dd>' + c.boite + '</dd></div>' +
+          '<div><dt>Énergie</dt><dd>' + c.energie + '</dd></div>' +
+          '<div><dt>Places</dt><dd>' + c.places + '</dd></div>' +
+          '<div><dt>Coffre</dt><dd>' + c.coffre + '</dd></div>' +
         '</dl>' +
         '<div class="car__foot">' +
-          '<p class="car__price"><b>' + v.price + ' €</b><span>par jour, tout inclus</span></p>' +
-          '<a class="btn btn--ghost btn--sm" href="#reserver">Réserver</a>' +
+          '<p class="car__price"><b>Tarif du jour</b><span>affiché sur l\'annonce</span></p>' +
+          '<a class="btn btn--primary btn--sm" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Réserver <span aria-hidden="true">↗</span></a>' +
         '</div>' +
       '</div>' +
     '</article>';
   }
 
   var grid = document.getElementById('fleet-grid');
-  var chips = document.getElementById('chips');
-  var fleetNote = document.getElementById('fleet-note');
-  var activeCat = 'all';
+  if (grid) grid.innerHTML = CARS.map(carCard).join('');
 
-  function renderFleet() {
-    if (!grid) return;
-    var list = activeCat === 'all' ? FLEET : FLEET.filter(function (v) { return v.cat === activeCat; });
-    grid.innerHTML = list.map(carCard).join('');
-    if (fleetNote) {
-      fleetNote.textContent = list.length + ' véhicule' + (list.length > 1 ? 's' : '') +
-        (activeCat === 'all' ? ' au catalogue' : ' en catégorie ' + catLabel(activeCat).toLowerCase()) +
-        ' — tarifs TTC pour une location de 3 jours ou plus, assurance et assistance comprises.';
-    }
+  var reviewLinks = document.getElementById('review-links');
+  if (reviewLinks) {
+    reviewLinks.innerHTML = CARS.map(function (c) {
+      return '<a class="rev-link" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="rev-link__dot" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="rev-link__txt"><b>' + c.name + ' ' + c.variant.toLowerCase() + '</b>' +
+        '<span>Voir les avis et les disponibilités sur Turo</span></span>' +
+        '<span class="rev-link__go" aria-hidden="true">↗</span></a>';
+    }).join('');
   }
 
-  function renderChips() {
-    if (!chips) return;
-    var all = [{ id: 'all', label: 'Toute la flotte' }].concat(CATEGORIES);
-    chips.innerHTML = all.map(function (c) {
-      return '<button type="button" role="tab" class="chip" data-cat="' + c.id + '" aria-selected="' +
-        (c.id === activeCat) + '">' + c.label + '</button>';
+  var finalCta = document.getElementById('final-cta');
+  if (finalCta) {
+    finalCta.innerHTML = CARS.map(function (c, i) {
+      return '<a class="btn ' + (i === 0 ? 'btn--light' : 'btn--outline') + '" href="' + c.turo +
+        '" target="_blank" rel="noopener noreferrer">La ' + c.variant.toLowerCase() + ' <span aria-hidden="true">↗</span></a>';
     }).join('');
-    chips.querySelectorAll('.chip').forEach(function (btn) {
+  }
+
+  var footCars = document.getElementById('foot-cars');
+  if (footCars) {
+    footCars.innerHTML = CARS.map(function (c) {
+      return '<a href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Sandero ' + c.variant.toLowerCase() + ' ↗</a>';
+    }).join('');
+  }
+
+  /* ------------- 5. Sélecteur de réservation (renvoi vers Turo) ---------- */
+  var picker = document.getElementById('picker');
+  var cta = document.getElementById('cta-turo');
+  var inDep = document.getElementById('depart');
+  var inRet = document.getElementById('retour');
+  var outDays = document.getElementById('est-days');
+  var outDetail = document.getElementById('est-detail');
+  var selected = CARS[0].id;
+
+  function selectedCar() {
+    return CARS.filter(function (c) { return c.id === selected; })[0] || CARS[0];
+  }
+
+  function renderPicker() {
+    if (!picker) return;
+    picker.innerHTML = CARS.map(function (c) {
+      return '<button type="button" role="radio" class="pick" data-id="' + c.id + '" aria-checked="' + (c.id === selected) + '">' +
+        '<span class="pick__swatch" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="pick__txt"><b>' + c.name + '</b><span>' + c.variant + ' · Cergy</span></span></button>';
+    }).join('');
+    picker.querySelectorAll('.pick').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        activeCat = btn.dataset.cat;
-        renderChips();
-        renderFleet();
+        selected = btn.dataset.id;
+        renderPicker();
+        syncCta();
       });
     });
   }
 
-  renderChips();
-  renderFleet();
-
-  /* --------------------- 4. Moteur de réservation ----------------------- */
-  var selCat = document.getElementById('categorie');
-  var selAgence = document.getElementById('agence');
-  var inDep = document.getElementById('depart');
-  var inRet = document.getElementById('retour');
-  var outTotal = document.getElementById('est-total');
-  var outDetail = document.getElementById('est-detail');
-  var form = document.getElementById('reserver');
+  function syncCta() {
+    var c = selectedCar();
+    if (cta) {
+      cta.href = c.turo;
+      cta.innerHTML = 'Voir les dates de la ' + c.variant.toLowerCase() + ' sur Turo <span aria-hidden="true">↗</span>';
+    }
+  }
 
   function iso(d) { return d.toISOString().slice(0, 10); }
 
-  if (selCat) {
-    selCat.innerHTML = CATEGORIES.map(function (c) {
-      return '<option value="' + c.id + '">' + c.label + ' — à partir de ' + c.price + ' €/jour</option>';
-    }).join('');
-    selCat.value = 'citadine';
-  }
-
   if (inDep && inRet) {
     var today = new Date();
-    var start = new Date(today.getTime() + 2 * 864e5);
-    var end = new Date(today.getTime() + 6 * 864e5);
-    inDep.value = iso(start);
-    inRet.value = iso(end);
+    inDep.value = iso(new Date(today.getTime() + 2 * 864e5));
+    inRet.value = iso(new Date(today.getTime() + 5 * 864e5));
     inDep.min = iso(today);
-    inRet.min = iso(start);
+    inRet.min = inDep.value;
   }
 
-  var euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
-  function estimate() {
-    if (!inDep || !inRet || !selCat || !outTotal) return;
+  function updateDuration() {
+    if (!inDep || !inRet || !outDays) return;
     var d1 = new Date(inDep.value), d2 = new Date(inRet.value);
-    var cat = CATEGORIES.filter(function (c) { return c.id === selCat.value; })[0] || CATEGORIES[0];
-
     if (isNaN(d1) || isNaN(d2) || d2 <= d1) {
-      outTotal.textContent = '—';
+      outDays.textContent = '—';
       outDetail.textContent = 'La date de retour doit être postérieure au départ.';
       return;
     }
-
     var days = Math.max(1, Math.round((d2 - d1) / 864e5));
-    var discount = days >= 7 ? 0.15 : days >= 3 ? 0.08 : 0;
-    var base = cat.price * days * (1 - discount);
-    var delivery = selAgence && selAgence.value === 'livraison' ? 39 : 0;
-    var total = Math.round(base + delivery);
-
-    outTotal.textContent = euro.format(total);
-
-    var parts = [days + ' jour' + (days > 1 ? 's' : '') + ' × ' + cat.price + ' €'];
-    if (discount) parts.push('remise longue durée −' + Math.round(discount * 100) + ' %');
-    if (delivery) parts.push('livraison 39 €');
-    parts.push(days >= 3 ? 'kilomètres illimités' : '250 km/jour inclus');
-    outDetail.textContent = parts.join(' · ');
+    outDays.textContent = days + ' jour' + (days > 1 ? 's' : '');
+    outDetail.textContent = 'Du ' + d1.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' au ' + d2.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' — à confirmer sur Turo, avec le tarif du jour.';
   }
 
-  [inDep, inRet, selCat, selAgence].forEach(function (el) {
-    if (el) el.addEventListener('change', estimate);
-  });
   if (inDep) {
     inDep.addEventListener('change', function () {
       if (inRet) {
         inRet.min = inDep.value;
-        if (inRet.value <= inDep.value) {
-          var next = new Date(new Date(inDep.value).getTime() + 864e5);
-          inRet.value = iso(next);
-        }
+        if (inRet.value <= inDep.value) inRet.value = iso(new Date(new Date(inDep.value).getTime() + 864e5));
       }
-      estimate();
+      updateDuration();
     });
   }
-  estimate();
+  if (inRet) inRet.addEventListener('change', updateDuration);
 
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      activeCat = selCat ? selCat.value : 'all';
-      renderChips();
-      renderFleet();
-      var target = document.getElementById('flotte');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
+  renderPicker();
+  syncCta();
+  updateDuration();
 
-  /* ------------------ 5. Traînées lumineuses du hero -------------------- */
+  /* ------------------ 6. Traînées lumineuses du hero -------------------- */
   var canvas = document.getElementById('road');
   if (canvas && canvas.getContext) {
     var ctx = canvas.getContext('2d');

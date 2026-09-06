@@ -1,13 +1,44 @@
 /* ==========================================================================
    TBConnect — interactions du site vitrine
-   1. Thème  2. Navigation  3. Flotte (données + rendu + filtre)
-   4. Moteur de réservation  5. Traînées lumineuses du hero
+   1. Données  2. Thème  3. Navigation  4. Silhouettes + rendu
+   5. Sélecteur de réservation (renvoi vers Turo)  6. Traînées du hero
    ========================================================================== */
 (function () {
   'use strict';
 
-  /* ------------------------------ 1. Thème ------------------------------ */
+  /* ------------------------------ 1. Données ---------------------------- */
+  /* Une seule source de vérité : modifier ici met à jour le sélecteur du hero,
+     les fiches, les liens d'avis, le CTA final et le pied de page. */
+  var CARS = [
+    {
+      id: 'bleue',
+      name: 'Dacia Sandero',
+      variant: 'Bleue',
+      color: 'var(--car-blue)',
+      swatch: 'var(--car-blue)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3887182',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    },
+    {
+      id: 'blanche',
+      name: 'Dacia Sandero',
+      variant: 'Blanche',
+      color: 'var(--car-white)',
+      swatch: 'var(--car-white)',
+      turo: 'https://turo.com/fr/fr/location-voiture/france/cergy-95/dacia/sandero/3876979',
+      boite: 'Manuelle',
+      energie: 'Essence',
+      places: '5',
+      coffre: '328 L'
+    }
+  ];
+
   var root = document.documentElement;
+
+  /* ------------------------------- 2. Thème ----------------------------- */
   var stored = null;
   try { stored = localStorage.getItem('tbc-theme'); } catch (e) { /* navigation privée */ }
   if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
@@ -28,7 +59,7 @@
     });
   }
 
-  /* --------------------------- 2. Navigation ---------------------------- */
+  /* ---------------------------- 3. Navigation --------------------------- */
   var nav = document.querySelector('.nav');
   var burger = document.getElementById('burger');
 
@@ -46,226 +77,162 @@
     });
   }
 
-  var onScroll = function () {
+  window.addEventListener('scroll', function () {
     if (nav) nav.classList.toggle('is-stuck', window.scrollY > 8);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  }, { passive: true });
 
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ------------------------------ 3. Flotte ----------------------------- */
-  var CATEGORIES = [
-    { id: 'citadine',    label: 'Citadine',    price: 34,  tone: 'accent' },
-    { id: 'berline',     label: 'Berline',     price: 52,  tone: 'accent' },
-    { id: 'suv',         label: 'SUV',         price: 68,  tone: 'accent2' },
-    { id: 'utilitaire',  label: 'Utilitaire',  price: 59,  tone: 'ink' },
-    { id: 'electrique',  label: 'Électrique',  price: 62,  tone: 'good' },
-    { id: 'premium',     label: 'Premium',     price: 119, tone: 'accent2' }
-  ];
+  /* --------------------- 4. Silhouettes et rendu ------------------------ */
+  /* Silhouette construite en primitives géométriques, pas en tracé dessiné. */
+  function silhouette(color) {
+    var x1 = 26, x2 = 176, bodyTop = 48, roofTop = 20, bottom = 74, r = 15;
+    var roofX1 = x1 + 34, roofX2 = x2 - 26;
+    var roof = 'M' + roofX1 + ',' + bodyTop + ' L' + (roofX1 + 18) + ',' + roofTop +
+               ' L' + (roofX2 - 14) + ',' + roofTop + ' L' + roofX2 + ',' + bodyTop + ' Z';
+    var glass = 'M' + (roofX1 + 11) + ',' + (bodyTop - 6) + ' L' + (roofX1 + 25) + ',' + (roofTop + 9) +
+                ' L' + (roofX2 - 21) + ',' + (roofTop + 9) + ' L' + (roofX2 - 10) + ',' + (bodyTop - 6) + ' Z';
 
-  var FLEET = [
-    { cat:'citadine',   name:'Renault Clio V',        trim:'1.0 TCe 90',       price:34,  boite:'Manuelle',  energie:'Essence',    places:'5', coffre:'391 L' },
-    { cat:'citadine',   name:'Peugeot 208',           trim:'PureTech 100',     price:36,  boite:'Auto EAT8', energie:'Essence',    places:'5', coffre:'352 L' },
-    { cat:'citadine',   name:'Toyota Yaris',          trim:'Hybride 116h',     price:41,  boite:'Auto',      energie:'Hybride',    places:'5', coffre:'286 L' },
-    { cat:'berline',    name:'Peugeot 508',           trim:'BlueHDi 130',      price:52,  boite:'Auto EAT8', energie:'Diesel',     places:'5', coffre:'487 L' },
-    { cat:'berline',    name:'Volkswagen Passat SW',  trim:'2.0 TDI 150',      price:58,  boite:'Auto DSG',  energie:'Diesel',     places:'5', coffre:'650 L' },
-    { cat:'suv',        name:'Dacia Duster',          trim:'TCe 130 4x2',      price:49,  boite:'Manuelle',  energie:'Essence',    places:'5', coffre:'478 L' },
-    { cat:'suv',        name:'Peugeot 3008',          trim:'Hybrid 136',       price:68,  boite:'Auto e-DCS',energie:'Hybride',    places:'5', coffre:'520 L' },
-    { cat:'suv',        name:'Volkswagen T-Roc',      trim:'1.5 TSI 150',      price:64,  boite:'Auto DSG',  energie:'Essence',    places:'5', coffre:'445 L' },
-    { cat:'utilitaire', name:'Renault Trafic',        trim:'L1H1 · 6 m³',      price:59,  boite:'Manuelle',  energie:'Diesel',     places:'3', coffre:'6 m³' },
-    { cat:'utilitaire', name:'Peugeot Boxer',         trim:'L2H2 · 11,5 m³',   price:79,  boite:'Manuelle',  energie:'Diesel',     places:'3', coffre:'11,5 m³' },
-    { cat:'electrique', name:'Renault Mégane E-Tech', trim:'EV60 · 450 km',    price:62,  boite:'Auto',      energie:'100 % élec.',places:'5', coffre:'440 L' },
-    { cat:'electrique', name:'Tesla Model 3',         trim:'Propulsion · 513 km', price:89, boite:'Auto',   energie:'100 % élec.',places:'5', coffre:'594 L' },
-    { cat:'premium',    name:'BMW Série 5',           trim:'520d xDrive',      price:119, boite:'Auto',      energie:'Diesel',     places:'5', coffre:'520 L' },
-    { cat:'premium',    name:'Mercedes Classe E',     trim:'E 220 d AMG Line', price:139, boite:'Auto 9G',   energie:'Diesel',     places:'5', coffre:'540 L' }
-  ];
-
-  /* Silhouettes : construites en primitives (pas de tracé dessiné à la main) */
-  var SHAPES = {
-    citadine:   { x1: 30, x2: 172, bodyTop: 50, roofTop: 22, rf: 34, rr: 24, wf: 66, wr: 142, r: 15 },
-    berline:    { x1: 18, x2: 186, bodyTop: 52, roofTop: 26, rf: 44, rr: 40, wf: 60, wr: 150, r: 15 },
-    suv:        { x1: 24, x2: 180, bodyTop: 44, roofTop: 14, rf: 32, rr: 22, wf: 64, wr: 146, r: 18 },
-    utilitaire: { x1: 16, x2: 188, bodyTop: 46, roofTop: 12, rf: 26, rr: 4,  wf: 58, wr: 156, r: 16, box: true },
-    electrique: { x1: 20, x2: 184, bodyTop: 50, roofTop: 20, rf: 40, rr: 34, wf: 62, wr: 148, r: 16 },
-    premium:    { x1: 14, x2: 190, bodyTop: 54, roofTop: 28, rf: 50, rr: 44, wf: 58, wr: 152, r: 15 }
-  };
-
-  var TONE = { accent: 'var(--accent)', accent2: 'var(--accent-2)', good: 'var(--good)', ink: 'var(--ink-2)' };
-
-  function silhouette(cat) {
-    var s = SHAPES[cat] || SHAPES.berline;
-    var tone = TONE[(CATEGORIES.filter(function (c) { return c.id === cat; })[0] || {}).tone] || TONE.accent;
-    var bottom = 74;
-    var roofX1 = s.x1 + s.rf;
-    var roofX2 = s.x2 - s.rr;
-    var roof = 'M' + roofX1 + ',' + s.bodyTop +
-               ' L' + (roofX1 + (s.box ? 4 : 18)) + ',' + s.roofTop +
-               ' L' + (roofX2 - (s.box ? 2 : 14)) + ',' + s.roofTop +
-               ' L' + roofX2 + ',' + s.bodyTop + ' Z';
-    var glass = 'M' + (roofX1 + 11) + ',' + (s.bodyTop - 6) +
-                ' L' + (roofX1 + (s.box ? 12 : 25)) + ',' + (s.roofTop + 9) +
-                ' L' + (roofX2 - (s.box ? 10 : 21)) + ',' + (s.roofTop + 9) +
-                ' L' + (roofX2 - 10) + ',' + (s.bodyTop - 6) + ' Z';
-
-    return '<svg viewBox="0 0 200 100" role="img" aria-hidden="true" style="color:' + tone + '">' +
-      '<line x1="6" y1="' + (bottom + s.r) + '" x2="194" y2="' + (bottom + s.r) + '" stroke="var(--line-strong)" stroke-width="1.5" stroke-linecap="round"/>' +
-      '<path d="' + roof + '" fill="currentColor" opacity=".9"/>' +
-      '<rect x="' + s.x1 + '" y="' + s.bodyTop + '" width="' + (s.x2 - s.x1) + '" height="' + (bottom - s.bodyTop) + '" rx="' + (s.box ? 7 : 12) + '" fill="currentColor" opacity=".9"/>' +
-      '<path d="' + glass + '" fill="var(--surface)" opacity=".82"/>' +
-      '<rect x="' + (s.x2 - 9) + '" y="' + (s.bodyTop + 6) + '" width="7" height="6" rx="2" fill="var(--surface)" opacity=".7"/>' +
-      '<circle cx="' + s.wf + '" cy="' + bottom + '" r="' + s.r + '" fill="var(--ink)"/>' +
-      '<circle cx="' + s.wf + '" cy="' + bottom + '" r="' + Math.round(s.r * 0.42) + '" fill="var(--surface)"/>' +
-      '<circle cx="' + s.wr + '" cy="' + bottom + '" r="' + s.r + '" fill="var(--ink)"/>' +
-      '<circle cx="' + s.wr + '" cy="' + bottom + '" r="' + Math.round(s.r * 0.42) + '" fill="var(--surface)"/>' +
+    return '<svg viewBox="0 0 200 100" role="img" aria-hidden="true" style="color:' + color + '">' +
+      '<line x1="6" y1="' + (bottom + r) + '" x2="194" y2="' + (bottom + r) + '" stroke="var(--line-strong)" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="' + roof + '" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<rect x="' + x1 + '" y="' + bodyTop + '" width="' + (x2 - x1) + '" height="' + (bottom - bodyTop) + '" rx="12" fill="currentColor" stroke="var(--car-stroke)" stroke-width=".8"/>' +
+      '<path d="' + glass + '" fill="var(--surface)" opacity=".85"/>' +
+      '<rect x="' + (x2 - 9) + '" y="' + (bodyTop + 6) + '" width="7" height="6" rx="2" fill="var(--surface)" opacity=".7"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x1 + 36) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="' + r + '" fill="var(--ink)"/>' +
+      '<circle cx="' + (x2 - 30) + '" cy="' + bottom + '" r="6" fill="var(--surface)"/>' +
       '</svg>';
   }
 
-  function catLabel(id) {
-    var c = CATEGORIES.filter(function (x) { return x.id === id; })[0];
-    return c ? c.label : id;
-  }
-
-  function carCard(v) {
+  function carCard(c) {
     return '<article class="car">' +
-      '<div class="car__vis"><span class="car__cat">' + catLabel(v.cat) + '</span>' + silhouette(v.cat) + '</div>' +
+      '<div class="car__vis"><span class="car__cat">Sandero ' + c.variant.toLowerCase() + '</span>' + silhouette(c.color) + '</div>' +
       '<div class="car__body">' +
-        '<div class="car__title"><h3>' + v.name + '</h3><span>' + v.trim + '</span></div>' +
+        '<div class="car__title"><h3>' + c.name + ' — ' + c.variant + '</h3><span>Cergy (95)</span></div>' +
         '<dl class="car__specs">' +
-          '<div><dt>Boîte</dt><dd>' + v.boite + '</dd></div>' +
-          '<div><dt>Énergie</dt><dd>' + v.energie + '</dd></div>' +
-          '<div><dt>Places</dt><dd>' + v.places + '</dd></div>' +
-          '<div><dt>Coffre</dt><dd>' + v.coffre + '</dd></div>' +
+          '<div><dt>Boîte</dt><dd>' + c.boite + '</dd></div>' +
+          '<div><dt>Énergie</dt><dd>' + c.energie + '</dd></div>' +
+          '<div><dt>Places</dt><dd>' + c.places + '</dd></div>' +
+          '<div><dt>Coffre</dt><dd>' + c.coffre + '</dd></div>' +
         '</dl>' +
         '<div class="car__foot">' +
-          '<p class="car__price"><b>' + v.price + ' €</b><span>par jour, tout inclus</span></p>' +
-          '<a class="btn btn--ghost btn--sm" href="#reserver">Réserver</a>' +
+          '<p class="car__price"><b>Tarif du jour</b><span>affiché sur l\'annonce</span></p>' +
+          '<a class="btn btn--primary btn--sm" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Réserver <span aria-hidden="true">↗</span></a>' +
         '</div>' +
       '</div>' +
     '</article>';
   }
 
   var grid = document.getElementById('fleet-grid');
-  var chips = document.getElementById('chips');
-  var fleetNote = document.getElementById('fleet-note');
-  var activeCat = 'all';
+  if (grid) grid.innerHTML = CARS.map(carCard).join('');
 
-  function renderFleet() {
-    if (!grid) return;
-    var list = activeCat === 'all' ? FLEET : FLEET.filter(function (v) { return v.cat === activeCat; });
-    grid.innerHTML = list.map(carCard).join('');
-    if (fleetNote) {
-      fleetNote.textContent = list.length + ' véhicule' + (list.length > 1 ? 's' : '') +
-        (activeCat === 'all' ? ' au catalogue' : ' en catégorie ' + catLabel(activeCat).toLowerCase()) +
-        ' — tarifs TTC pour une location de 3 jours ou plus, assurance et assistance comprises.';
-    }
+  var reviewLinks = document.getElementById('review-links');
+  if (reviewLinks) {
+    reviewLinks.innerHTML = CARS.map(function (c) {
+      return '<a class="rev-link" href="' + c.turo + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="rev-link__dot" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="rev-link__txt"><b>' + c.name + ' ' + c.variant.toLowerCase() + '</b>' +
+        '<span>Voir les avis et les disponibilités sur Turo</span></span>' +
+        '<span class="rev-link__go" aria-hidden="true">↗</span></a>';
+    }).join('');
   }
 
-  function renderChips() {
-    if (!chips) return;
-    var all = [{ id: 'all', label: 'Toute la flotte' }].concat(CATEGORIES);
-    chips.innerHTML = all.map(function (c) {
-      return '<button type="button" role="tab" class="chip" data-cat="' + c.id + '" aria-selected="' +
-        (c.id === activeCat) + '">' + c.label + '</button>';
+  var finalCta = document.getElementById('final-cta');
+  if (finalCta) {
+    finalCta.innerHTML = CARS.map(function (c, i) {
+      return '<a class="btn ' + (i === 0 ? 'btn--light' : 'btn--outline') + '" href="' + c.turo +
+        '" target="_blank" rel="noopener noreferrer">La ' + c.variant.toLowerCase() + ' <span aria-hidden="true">↗</span></a>';
     }).join('');
-    chips.querySelectorAll('.chip').forEach(function (btn) {
+  }
+
+  var footCars = document.getElementById('foot-cars');
+  if (footCars) {
+    footCars.innerHTML = CARS.map(function (c) {
+      return '<a href="' + c.turo + '" target="_blank" rel="noopener noreferrer">Sandero ' + c.variant.toLowerCase() + ' ↗</a>';
+    }).join('');
+  }
+
+  /* ------------- 5. Sélecteur de réservation (renvoi vers Turo) ---------- */
+  var picker = document.getElementById('picker');
+  var cta = document.getElementById('cta-turo');
+  var inDep = document.getElementById('depart');
+  var inRet = document.getElementById('retour');
+  var outDays = document.getElementById('est-days');
+  var outDetail = document.getElementById('est-detail');
+  var selected = CARS[0].id;
+
+  function selectedCar() {
+    return CARS.filter(function (c) { return c.id === selected; })[0] || CARS[0];
+  }
+
+  function renderPicker() {
+    if (!picker) return;
+    picker.innerHTML = CARS.map(function (c) {
+      return '<button type="button" role="radio" class="pick" data-id="' + c.id + '" aria-checked="' + (c.id === selected) + '">' +
+        '<span class="pick__swatch" style="background:' + c.swatch + '" aria-hidden="true"></span>' +
+        '<span class="pick__txt"><b>' + c.name + '</b><span>' + c.variant + ' · Cergy</span></span></button>';
+    }).join('');
+    picker.querySelectorAll('.pick').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        activeCat = btn.dataset.cat;
-        renderChips();
-        renderFleet();
+        selected = btn.dataset.id;
+        renderPicker();
+        syncCta();
       });
     });
   }
 
-  renderChips();
-  renderFleet();
-
-  /* --------------------- 4. Moteur de réservation ----------------------- */
-  var selCat = document.getElementById('categorie');
-  var selAgence = document.getElementById('agence');
-  var inDep = document.getElementById('depart');
-  var inRet = document.getElementById('retour');
-  var outTotal = document.getElementById('est-total');
-  var outDetail = document.getElementById('est-detail');
-  var form = document.getElementById('reserver');
+  function syncCta() {
+    var c = selectedCar();
+    if (cta) {
+      cta.href = c.turo;
+      cta.innerHTML = 'Voir les dates de la ' + c.variant.toLowerCase() + ' sur Turo <span aria-hidden="true">↗</span>';
+    }
+  }
 
   function iso(d) { return d.toISOString().slice(0, 10); }
 
-  if (selCat) {
-    selCat.innerHTML = CATEGORIES.map(function (c) {
-      return '<option value="' + c.id + '">' + c.label + ' — à partir de ' + c.price + ' €/jour</option>';
-    }).join('');
-    selCat.value = 'citadine';
-  }
-
   if (inDep && inRet) {
     var today = new Date();
-    var start = new Date(today.getTime() + 2 * 864e5);
-    var end = new Date(today.getTime() + 6 * 864e5);
-    inDep.value = iso(start);
-    inRet.value = iso(end);
+    inDep.value = iso(new Date(today.getTime() + 2 * 864e5));
+    inRet.value = iso(new Date(today.getTime() + 5 * 864e5));
     inDep.min = iso(today);
-    inRet.min = iso(start);
+    inRet.min = inDep.value;
   }
 
-  var euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
-  function estimate() {
-    if (!inDep || !inRet || !selCat || !outTotal) return;
+  function updateDuration() {
+    if (!inDep || !inRet || !outDays) return;
     var d1 = new Date(inDep.value), d2 = new Date(inRet.value);
-    var cat = CATEGORIES.filter(function (c) { return c.id === selCat.value; })[0] || CATEGORIES[0];
-
     if (isNaN(d1) || isNaN(d2) || d2 <= d1) {
-      outTotal.textContent = '—';
+      outDays.textContent = '—';
       outDetail.textContent = 'La date de retour doit être postérieure au départ.';
       return;
     }
-
     var days = Math.max(1, Math.round((d2 - d1) / 864e5));
-    var discount = days >= 7 ? 0.15 : days >= 3 ? 0.08 : 0;
-    var base = cat.price * days * (1 - discount);
-    var delivery = selAgence && selAgence.value === 'livraison' ? 39 : 0;
-    var total = Math.round(base + delivery);
-
-    outTotal.textContent = euro.format(total);
-
-    var parts = [days + ' jour' + (days > 1 ? 's' : '') + ' × ' + cat.price + ' €'];
-    if (discount) parts.push('remise longue durée −' + Math.round(discount * 100) + ' %');
-    if (delivery) parts.push('livraison 39 €');
-    parts.push(days >= 3 ? 'kilomètres illimités' : '250 km/jour inclus');
-    outDetail.textContent = parts.join(' · ');
+    outDays.textContent = days + ' jour' + (days > 1 ? 's' : '');
+    outDetail.textContent = 'Du ' + d1.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' au ' + d2.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) +
+      ' — à confirmer sur Turo, avec le tarif du jour.';
   }
 
-  [inDep, inRet, selCat, selAgence].forEach(function (el) {
-    if (el) el.addEventListener('change', estimate);
-  });
   if (inDep) {
     inDep.addEventListener('change', function () {
       if (inRet) {
         inRet.min = inDep.value;
-        if (inRet.value <= inDep.value) {
-          var next = new Date(new Date(inDep.value).getTime() + 864e5);
-          inRet.value = iso(next);
-        }
+        if (inRet.value <= inDep.value) inRet.value = iso(new Date(new Date(inDep.value).getTime() + 864e5));
       }
-      estimate();
+      updateDuration();
     });
   }
-  estimate();
+  if (inRet) inRet.addEventListener('change', updateDuration);
 
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      activeCat = selCat ? selCat.value : 'all';
-      renderChips();
-      renderFleet();
-      var target = document.getElementById('flotte');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
+  renderPicker();
+  syncCta();
+  updateDuration();
 
-  /* ------------------ 5. Traînées lumineuses du hero -------------------- */
+  /* ------------------ 6. Traînées lumineuses du hero -------------------- */
   var canvas = document.getElementById('road');
   if (canvas && canvas.getContext) {
     var ctx = canvas.getContext('2d');

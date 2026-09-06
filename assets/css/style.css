@@ -27,6 +27,10 @@
   --good:#0E7C55;
   --good-bg:#E4F6EE;
 
+  --car-blue:#2E63D8;
+  --car-white:#E3E7F2;
+  --car-stroke:#AEB6CD;
+
   --dark-ground:#0A0C18;
   --dark-ink:#F2F3FB;
 
@@ -66,6 +70,10 @@
     --good:#4ED4A0;
     --good-bg:#0F2A22;
 
+    --car-blue:#6E97FF;
+    --car-white:#E9EDF8;
+    --car-stroke:#7A83A6;
+
     --dark-ground:#05060D;
     --dark-ink:#F2F3FB;
 
@@ -96,6 +104,10 @@
   --signal-bg:#2A2013;
   --good:#4ED4A0;
   --good-bg:#0F2A22;
+
+  --car-blue:#6E97FF;
+  --car-white:#E9EDF8;
+  --car-stroke:#7A83A6;
 
   --dark-ground:#05060D;
   --dark-ink:#F2F3FB;
@@ -231,13 +243,11 @@ em{font-style:normal;color:var(--accent)}
 .proof p{font-size:14.5px;color:var(--muted)}
 .proof p strong{color:var(--ink);font-family:var(--f-mono)}
 .proof p span{display:block}
-.proof__faces{display:flex}
-.proof__faces span{
-  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin-right:-9px;
-  background:var(--surface-3);border:2px solid var(--ground);color:var(--ink-2);
-  font:600 11px/1 var(--f-mono);
+.proof__mark{
+  flex-shrink:0;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);
+  font:600 16px/1 var(--f-mono);
 }
-.proof__faces span:last-child{background:var(--accent-soft);color:var(--accent)}
 
 /* Moteur de réservation */
 .book{
@@ -271,6 +281,19 @@ em{font-style:normal;color:var(--accent)}
 .estimate__price small{font:500 12px/1 var(--f-mono);color:var(--muted)}
 .estimate__detail{font-size:13px;color:var(--ink-2);margin-top:8px}
 .book__note{text-align:center;font-size:12.5px;color:var(--muted)}
+
+.picker{display:grid;gap:9px}
+.pick{
+  display:flex;align-items:center;gap:13px;text-align:left;cursor:pointer;
+  padding:13px 14px;border-radius:var(--r);border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink);transition:border-color .16s,background-color .16s;
+}
+.pick:hover{border-color:var(--accent)}
+.pick[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px var(--accent-soft)}
+.pick__swatch{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.pick__txt{display:grid;gap:2px;font-family:var(--f-body)}
+.pick__txt b{font-size:15px;font-weight:600}
+.pick__txt span{font-size:12.5px;color:var(--muted)}
 
 /* ---------- 6. Marques ---------- */
 .marques{padding-block:34px;border-block:1px solid var(--line)}
@@ -337,6 +360,8 @@ em{font-style:normal;color:var(--accent)}
 .car__foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .car__price b{font:600 26px/1 var(--f-mono);letter-spacing:-.03em}
 .car__price span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.fleet__grid--duo{grid-template-columns:repeat(2,1fr);max-width:840px}
+.fleet__grid--duo .car__vis{height:184px}
 .fleet__note{margin-top:26px;font-size:14px;color:var(--muted)}
 
 /* ---------- 9. Inclus ---------- */
@@ -385,6 +410,18 @@ em{font-style:normal;color:var(--accent)}
 /* ---------- 13. Avis ---------- */
 .reviews__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .review{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;gap:16px;align-content:start}
+.reviews__links{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:840px}
+.rev-link{
+  display:flex;align-items:center;gap:15px;text-decoration:none;
+  padding:20px 22px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.rev-link:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow)}
+.rev-link__dot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--car-stroke);flex-shrink:0}
+.rev-link__txt{display:grid;gap:3px}
+.rev-link__txt b{font-family:var(--f-display);font-size:17px;letter-spacing:-.02em}
+.rev-link__txt span{font-size:13.5px;color:var(--muted)}
+.rev-link__go{margin-left:auto;font-family:var(--f-mono);color:var(--accent);font-size:18px}
 .stars{color:var(--signal);letter-spacing:.14em;font-size:15px}
 .review blockquote{margin:0;font-size:16px;line-height:1.55;color:var(--ink)}
 .review figcaption{display:grid;gap:4px;padding-top:16px;border-top:1px solid var(--line)}
@@ -429,6 +466,8 @@ em{font-style:normal;color:var(--accent)}
 .foot__in{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;padding-top:56px;border-top:1px solid rgba(255,255,255,.1)}
 .foot__brand p{margin-top:16px;max-width:34ch;line-height:1.6}
 .foot__col{display:grid;gap:10px;align-content:start}
+.foot__col>div{display:grid;gap:10px}
+.foot__col p{line-height:1.6}
 .foot h3{color:#fff;font-size:14px;letter-spacing:.02em;margin-bottom:4px}
 .foot a{text-decoration:none;transition:color .16s}
 .foot a:hover{color:#fff}
@@ -440,7 +479,7 @@ em{font-style:normal;color:var(--accent)}
   .hero__in{grid-template-columns:1fr;gap:40px}
   .book{max-width:520px}
   .fleet__grid,.incl__grid,.how__list,.plans__grid{grid-template-columns:repeat(2,1fr)}
-  .reviews__grid,.spots__grid,.stats__in{grid-template-columns:repeat(2,1fr)}
+  .reviews__grid,.reviews__links,.spots__grid,.stats__in{grid-template-columns:repeat(2,1fr)}
   .foot__in{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
@@ -455,7 +494,7 @@ em{font-style:normal;color:var(--accent)}
   .burger{display:block}
   .tel,.theme__label{display:none}
   .theme{padding:9px}
-  .compare__grid,.fleet__grid,.incl__grid,.how__list,.plans__grid,.reviews__grid,.spots__grid{grid-template-columns:1fr}
+  .compare__grid,.fleet__grid,.fleet__grid--duo,.incl__grid,.how__list,.plans__grid,.reviews__grid,.reviews__links,.spots__grid{grid-template-columns:1fr}
   .marques__list{margin-left:0}
   .sec-head{margin-bottom:36px}
   .stats__in{gap:22px 18px}
